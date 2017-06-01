@@ -1,0 +1,10 @@
+package ba.infostudio.hcm.rgSkillGrades;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface RgSkillGradeRepository extends CrudRepository<RgSkillGrade, Long> {
+
+	public List<RgSkillGrade> findByRgSkillId(Long idSkill);
+}
