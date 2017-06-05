@@ -13,7 +13,7 @@ import ba.infostudio.hcm.rgSkils.RgSkill;
 public class RgSkillGrade {
 	
 	@Id
-	private Long    id;//ID komentar SEQ OID
+	private Long    id;
 	private String  code;
 	private String  name;
 	private String  description;
