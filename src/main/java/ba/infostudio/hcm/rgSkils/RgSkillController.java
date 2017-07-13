@@ -3,12 +3,15 @@ package ba.infostudio.hcm.rgSkils;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class RgSkillController {
 	
@@ -16,8 +19,10 @@ public class RgSkillController {
 	private RgSkillService rgSkillService;
 
 	@RequestMapping("/rgSkills")
-	public List<RgSkill> getAllRgSkills() {
-		return rgSkillService.getAllRgSkills();
+	public List<RgSkill> getAllRgSkills(@RequestParam(defaultValue="id") String sortBy, 
+			@RequestParam(defaultValue="ASC") String sort, @RequestParam(defaultValue="") String queryBy, 
+			@RequestParam(defaultValue="") String query) {
+		return rgSkillService.getAllRgSkills(sortBy, sort, queryBy, query);
 	}
 	
 	@RequestMapping("/rgSkills/{id}")
@@ -26,8 +31,8 @@ public class RgSkillController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/rgSkills")
-	public void addRgSkill(@RequestBody RgSkill rgSkill) {
-		rgSkillService.addRgSkill(rgSkill);
+	public RgSkill addRgSkill(@RequestBody RgSkill rgSkill) {
+		return rgSkillService.addRgSkill(rgSkill);
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/rgSkills/{id}")
