@@ -1,5 +1,7 @@
 package ba.infostudio.hcm.rgSkils;
 
+import java.lang.reflect.Field;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,6 +34,25 @@ public class RgSkill {
 		this.field = field;
 	}
 
+	@Override
+    public String toString() {
+        String classValues = null;
+        try {
+            classValues = getClass().getName() + " [";
+            Field[] fields = getClass().getDeclaredFields();
+            for (int i = 0; i < fields.length; i++) {
+                classValues = classValues + fields[i].getName() + "=";
+                classValues = classValues + fields[i].get(this) + ", ";
+            }
+            classValues = classValues.substring(0, classValues.length() - 2);
+            classValues = classValues + "]";
+        }
+        catch (Exception e) {
+            classValues = super.toString();
+        }
+        return classValues;
+    }
+  
 	public Long getId() {
 		return id;
 	}

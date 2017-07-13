@@ -1,5 +1,7 @@
 package ba.infostudio.hcm.leLegalEntityTypes;
 
+import java.lang.reflect.Field;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -61,20 +63,21 @@ public class LeLegalEntityType{
 	}
 
 	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("LeLegalEntityType [id=");
-		builder.append(id);
-		builder.append(", code=");
-		builder.append(code);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", description=");
-		builder.append(description);
-		builder.append("]");
-		return builder.toString();
-	}
-	
-
-
+    public String toString() {
+        String classValues = null;
+        try {
+            classValues = getClass().getName() + " [";
+            Field[] fields = getClass().getDeclaredFields();
+            for (int i = 0; i < fields.length; i++) {
+                classValues = classValues + fields[i].getName() + "=";
+                classValues = classValues + fields[i].get(this) + ", ";
+            }
+            classValues = classValues.substring(0, classValues.length() - 2);
+            classValues = classValues + "]";
+        }
+        catch (Exception e) {
+            classValues = super.toString();
+        }
+        return classValues;
+    }
 }
