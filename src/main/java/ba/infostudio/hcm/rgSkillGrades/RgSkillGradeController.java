@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import ba.infostudio.hcm.rgSkils.RgSkill;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -21,29 +21,28 @@ public class RgSkillGradeController {
 	private RgSkillGradeService rgSkillGradeService;
 
 	@RequestMapping("/rgSkills/{idSkill}/rgSkillGrades")
-	public List<RgSkillGrade> getAllRgSkillGrades(@PathVariable Long idSkill) {
-		return rgSkillGradeService.getAllRgSkillGrades(idSkill);
+	public List<RgSkillGrade> getAllRgSkillGrades(@PathVariable String idSkill, @RequestParam(defaultValue="id") String sortBy, 
+			@RequestParam(defaultValue="ASC") String sort) {
+		return rgSkillGradeService.getAllRgSkillGrades(idSkill, sortBy, sort);
 	}
 	
 	@RequestMapping("/rgSkills/{idSkill}/rgSkillGrades/{id}")
-	public RgSkillGrade getRgSkillGrade(@PathVariable Long id) {
+	public RgSkillGrade getRgSkillGrade(@PathVariable String id) {
 		return rgSkillGradeService.getRgSkillGrade(id);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/rgSkills/{idSkill}/rgSkillGrades")
-	public void addRgSkillGrade(@RequestBody RgSkillGrade rgSkillGrade, @PathVariable Long idSkill) {
-		rgSkillGrade.setRgSkill(new RgSkill(idSkill, "", "", "", ""));
-		rgSkillGradeService.addRgSkillGrade(rgSkillGrade);
+	public RgSkillGrade addRgSkillGrade(@RequestBody RgSkillGrade rgSkillGrade, @PathVariable Long idSkill) {
+		return rgSkillGradeService.addRgSkillGrade(rgSkillGrade);
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/rgSkills/{idSkill}/rgSkillGrades/{id}")
 	public void updateRgSkillGrade(@RequestBody RgSkillGrade rgSkillGrade, @PathVariable Long idSkill, @PathVariable Long id) {
-		rgSkillGrade.setRgSkill(new RgSkill(idSkill, "", "", "", ""));
 		rgSkillGradeService.updateRgSkillGrade(rgSkillGrade);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/rgSkills/{idSkill}/rgSkillGrades/{id}")
-	public void deleteRgSkillGrade(@PathVariable Long id) {
+	public void deleteRgSkillGrade(@PathVariable String id) {
 		rgSkillGradeService.deleteRgSkillGrade(id);
 	}
 }

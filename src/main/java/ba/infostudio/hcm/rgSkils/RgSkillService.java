@@ -80,8 +80,8 @@ public class RgSkillService {
 		return rgSkillRepository.save(rgSkill);
 	}
 
-	public void updateRgSkill(RgSkill topic) {
-		rgSkillRepository.save(topic);
+	public void updateRgSkill(RgSkill rgSkill) {
+		rgSkillRepository.save(rgSkill);
 	}
 
 	public void deleteRgSkill(String id) {
