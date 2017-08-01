@@ -76,7 +76,7 @@ public class OgWorkPlaceTypesService {
 	}
 
 	public OgWorkPlaceTypes addOgWorkPlaceTypes(OgWorkPlaceTypes ogWorkPlaceTypes) {
-		return ogWorkPlaceTypesRepository.save(rgSkill);
+		return ogWorkPlaceTypesRepository.save(ogWorkPlaceTypes);
 	}
 
 	public void updateOgWorkPlaceTypes(OgWorkPlaceTypes topic) {
