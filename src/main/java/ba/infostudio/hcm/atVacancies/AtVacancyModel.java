@@ -150,4 +150,22 @@ public class AtVacancyModel implements Serializable{
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
+
+    @Override
+    public String toString() {
+        return "AtVacancyModel{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", id_location=" + id_location +
+                ", date_from=" + date_from +
+                ", date_to=" + date_to +
+                ", id_work_place=" + id_work_place +
+                ", created_by='" + created_by + '\'' +
+                ", created_at=" + created_at +
+                ", updated_by='" + updated_by + '\'' +
+                ", updated_at=" + updated_at +
+                '}';
+    }
 }
