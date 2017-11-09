@@ -32,14 +32,16 @@ public class AtVacancyModel implements Serializable{
     @ManyToOne
     @JoinColumn(name = "ID_WORK_PLACE")
     private OgWorkPlacesModel id_work_place;
-
+    private String created_by;
+    private Timestamp created_at;
+    private String updated_by;
     private Timestamp updated_at;
 
 
     public AtVacancyModel() {
     }
 
-    public AtVacancyModel(String code, String name, String description, RgRegionsModel id_location, Date date_from, Date date_to, OgWorkPlacesModel id_work_place, Timestamp updated_at) {
+    public AtVacancyModel(String code, String name, String description, RgRegionsModel id_location, Date date_from, Date date_to, OgWorkPlacesModel id_work_place, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
         this.code = code;
         this.name = name;
         this.description = description;
@@ -47,6 +49,9 @@ public class AtVacancyModel implements Serializable{
         this.date_from = date_from;
         this.date_to = date_to;
         this.id_work_place = id_work_place;
+        this.created_by = created_by;
+        this.created_at = created_at;
+        this.updated_by = updated_by;
         this.updated_at = updated_at;
     }
 
@@ -114,6 +119,30 @@ public class AtVacancyModel implements Serializable{
         this.id_work_place = id_work_place;
     }
 
+    public String getCreated_by() {
+        return created_by;
+    }
+
+    public void setCreated_by(String created_by) {
+        this.created_by = created_by;
+    }
+
+    public Timestamp getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getUpdated_by() {
+        return updated_by;
+    }
+
+    public void setUpdated_by(String updated_by) {
+        this.updated_by = updated_by;
+    }
+
     public Timestamp getUpdated_at() {
         return updated_at;
     }
@@ -121,6 +150,4 @@ public class AtVacancyModel implements Serializable{
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
-
-
 }

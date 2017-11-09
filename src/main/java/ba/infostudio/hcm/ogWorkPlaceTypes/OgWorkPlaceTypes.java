@@ -1,6 +1,7 @@
 package ba.infostudio.hcm.ogWorkPlaceTypes;
 
 import java.lang.reflect.Field;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,82 +16,95 @@ import javax.persistence.Table;
 
 public class OgWorkPlaceTypes {
 	@Id
-	@Column(name="ID")
 	@SequenceGenerator(name="OID", sequenceName="OID", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="OID")	
 	private Long   id;
-	
-	@Column(name="CODE")
+
 	private String code;
-	
-	@Column(name="NAME")
+
 	private String name;
-	
-	@Column(name="DESCRIPTION")
+
 	private String description;
+
+    private String created_by;
+    private Timestamp created_at;
+    private String updated_by;
+    private Timestamp updated_at;
 	
 	public OgWorkPlaceTypes() {}
-	
-	public OgWorkPlaceTypes(Long id, String code, String name, String description) {
-		super();
-		this.id = id;
-		this.code = code;
-		this.name = name;
-		this.description = description; 
-	}
-	
-	
-	@Override
-    public String toString() {
-        String classValues = null;
-        try {
-            classValues = getClass().getName() + " [";
-            Field[] fields = getClass().getDeclaredFields();
-            for (int i = 0; i < fields.length; i++) {
-                classValues = classValues + fields[i].getName() + "=";
-                classValues = classValues + fields[i].get(this) + ", ";
-            }
-            classValues = classValues.substring(0, classValues.length() - 2);
-            classValues = classValues + "]";
-        }
-        catch (Exception e) {
-            classValues = super.toString();
-        }
-        return classValues;
+
+    public OgWorkPlaceTypes(String code, String name, String description, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
+        this.code = code;
+        this.name = name;
+        this.description = description;
+        this.created_by = created_by;
+        this.created_at = created_at;
+        this.updated_by = updated_by;
+        this.updated_at = updated_at;
     }
-  
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
+    public String getCreated_by() {
+        return created_by;
+    }
+
+    public void setCreated_by(String created_by) {
+        this.created_by = created_by;
+    }
+
+    public Timestamp getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getUpdated_by() {
+        return updated_by;
+    }
+
+    public void setUpdated_by(String updated_by) {
+        this.updated_by = updated_by;
+    }
+
+    public Timestamp getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(Timestamp updated_at) {
+        this.updated_at = updated_at;
+    }
 }
 
