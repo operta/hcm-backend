@@ -17,7 +17,7 @@ public class OgOrganizationsModel {
     private String code;
     private String name;
     private String description;
-//LEGALENTITY PLACEHOLDER
+//LEGALLENTITY PLACEHODER
     @ManyToOne
     @JoinColumn(name = "ID_PARENT")
     private OgOrganizationsModel parent;

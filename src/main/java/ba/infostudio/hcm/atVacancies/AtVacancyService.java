@@ -14,7 +14,8 @@ public class AtVacancyService {
         return this.atVacancyRepository.findAll();
     }
 
-    public AtVacancyModel getAtVacancy (String id){
-        return atVacancyRepository.findOne(Long.valueOf(id));
+
+    public AtVacancyModel addVacancy(AtVacancyModel atVacancyModel){
+        return this.atVacancyRepository.save(atVacancyModel);
     }
 }

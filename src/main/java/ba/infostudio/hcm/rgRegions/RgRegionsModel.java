@@ -1,6 +1,7 @@
 package ba.infostudio.hcm.rgRegions;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,10 +24,10 @@ public class RgRegionsModel implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "ID_PARENT")
-
     private RgRegionsModel idParent;
+
     @OneToMany(mappedBy = "idParent")
-    @JsonBackReference
+    @JsonBackReference(value= "parentChild")
     private Collection<RgRegionsModel> children;
 
 
@@ -35,10 +36,11 @@ public class RgRegionsModel implements Serializable {
 
     }
 
-    public RgRegionsModel(String code, String name, String description, RgRegionsModel idParent, Collection<RgRegionsModel> children) {
+    public RgRegionsModel(String code, String name, String description, Long idType, RgRegionsModel idParent, Collection<RgRegionsModel> children) {
         this.code = code;
         this.name = name;
         this.description = description;
+        this.idType = idType;
         this.idParent = idParent;
         this.children = children;
     }

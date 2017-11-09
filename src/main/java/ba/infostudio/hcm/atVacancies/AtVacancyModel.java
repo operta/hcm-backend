@@ -2,9 +2,13 @@ package ba.infostudio.hcm.atVacancies;
 
 import ba.infostudio.hcm.ogWorkPlaces.OgWorkPlacesModel;
 import ba.infostudio.hcm.rgRegions.RgRegionsModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "AT_VACANCIES")
@@ -16,30 +20,33 @@ public class AtVacancyModel implements Serializable{
     private String code;
     private String name;
     private String description;
-    @OneToOne
-    @JoinColumn(name="id_location")
-    private RgRegionsModel region;
-    private String date_from;
-    private String date_to;
 
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "ID_LOCATION")
+    private RgRegionsModel id_location;
+    private Date date_from;
+    private Date date_to;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "ID_WORK_PLACE")
-    private OgWorkPlacesModel workPlace;
+    private OgWorkPlacesModel id_work_place;
 
-    private String updated_at;
+    private Timestamp updated_at;
 
 
     public AtVacancyModel() {
     }
 
-    public AtVacancyModel(String code, String name, String description, RgRegionsModel region, String date_from, String date_to, OgWorkPlacesModel workPlace, String updated_at) {
+    public AtVacancyModel(String code, String name, String description, RgRegionsModel id_location, Date date_from, Date date_to, OgWorkPlacesModel id_work_place, Timestamp updated_at) {
         this.code = code;
         this.name = name;
         this.description = description;
-        this.region = region;
+        this.id_location = id_location;
         this.date_from = date_from;
         this.date_to = date_to;
-        this.workPlace = workPlace;
+        this.id_work_place = id_work_place;
         this.updated_at = updated_at;
     }
 
@@ -75,44 +82,45 @@ public class AtVacancyModel implements Serializable{
         this.description = description;
     }
 
-    public RgRegionsModel getRegion() {
-        return region;
+    public RgRegionsModel getId_location() {
+        return id_location;
     }
 
-    public void setRegion(RgRegionsModel region) {
-        this.region = region;
+    public void setId_location(RgRegionsModel id_location) {
+        this.id_location = id_location;
     }
 
-    public String getDate_from() {
+    public Date getDate_from() {
         return date_from;
     }
 
-    public void setDate_from(String date_from) {
+    public void setDate_from(Date date_from) {
         this.date_from = date_from;
     }
 
-    public String getDate_to() {
+    public Date getDate_to() {
         return date_to;
     }
 
-    public void setDate_to(String date_to) {
+    public void setDate_to(Date date_to) {
         this.date_to = date_to;
     }
 
-    public OgWorkPlacesModel getWorkPlace() {
-        return workPlace;
+    public OgWorkPlacesModel getId_work_place() {
+        return id_work_place;
     }
 
-    public void setWorkPlace(OgWorkPlacesModel workPlace) {
-        this.workPlace = workPlace;
+    public void setId_work_place(OgWorkPlacesModel id_work_place) {
+        this.id_work_place = id_work_place;
     }
 
-    public String getUpdated_at() {
+    public Timestamp getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(String updated_at) {
+    public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
-    
+
+
 }

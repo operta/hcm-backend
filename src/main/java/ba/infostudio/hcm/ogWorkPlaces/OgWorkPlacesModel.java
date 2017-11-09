@@ -4,6 +4,7 @@ import ba.infostudio.hcm.atVacancies.AtVacancyModel;
 import ba.infostudio.hcm.ogOrganizations.OgOrganizationsModel;
 import ba.infostudio.hcm.ogWorkPlaceTypes.OgWorkPlaceTypes;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,21 +24,22 @@ public class OgWorkPlacesModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "ID_PARENT")
     private OgWorkPlacesModel parent;
+
     @OneToMany(mappedBy = "parent")
     @JsonBackReference
     private Collection<OgWorkPlacesModel> children;
+
 
     @ManyToOne
     @JoinColumn(name = "ID_ORGANIZATION")
     private OgOrganizationsModel organization;
 
-
     @ManyToOne
     @JoinColumn(name="ID_WORK_PLACE_TYPE")
     private OgWorkPlaceTypes workPlaceType;
 
-    @OneToMany(mappedBy = "workPlace")
     @JsonBackReference
+    @OneToMany(mappedBy = "id_work_place")
     private Collection<AtVacancyModel> vacancies;
 
     public OgWorkPlacesModel() {
