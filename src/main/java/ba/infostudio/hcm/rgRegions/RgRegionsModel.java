@@ -20,13 +20,13 @@ public class RgRegionsModel implements Serializable {
 
     private String description;
 
-    private Long idType;
+    private Long id_type;
 
     @ManyToOne
     @JoinColumn(name = "ID_PARENT")
-    private RgRegionsModel idParent;
+    private RgRegionsModel id_parent;
 
-    @OneToMany(mappedBy = "idParent")
+    @OneToMany(mappedBy = "id_parent")
     @JsonBackReference(value= "parentChild")
     private Collection<RgRegionsModel> children;
 
@@ -36,12 +36,12 @@ public class RgRegionsModel implements Serializable {
 
     }
 
-    public RgRegionsModel(String code, String name, String description, Long idType, RgRegionsModel idParent, Collection<RgRegionsModel> children) {
+    public RgRegionsModel(String code, String name, String description, Long id_type, RgRegionsModel id_parent, Collection<RgRegionsModel> children) {
         this.code = code;
         this.name = name;
         this.description = description;
-        this.idType = idType;
-        this.idParent = idParent;
+        this.id_type = id_type;
+        this.id_parent = id_parent;
         this.children = children;
     }
 
@@ -77,20 +77,20 @@ public class RgRegionsModel implements Serializable {
         this.description = description;
     }
 
-    public Long getIdType() {
-        return idType;
+    public Long getId_type() {
+        return id_type;
     }
 
-    public void setIdType(Long idType) {
-        this.idType = idType;
+    public void setId_type(Long id_type) {
+        this.id_type = id_type;
     }
 
-    public RgRegionsModel getIdParent() {
-        return idParent;
+    public RgRegionsModel getId_parent() {
+        return id_parent;
     }
 
-    public void setIdParent(RgRegionsModel idParent) {
-        this.idParent = idParent;
+    public void setId_parent(RgRegionsModel id_parent) {
+        this.id_parent = id_parent;
     }
 
     public Collection<RgRegionsModel> getChildren() {

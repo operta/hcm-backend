@@ -23,20 +23,20 @@ public class OgWorkPlacesModel implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "ID_PARENT")
-    private OgWorkPlacesModel parent;
+    private OgWorkPlacesModel id_parent;
 
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "id_parent")
     @JsonBackReference
     private Collection<OgWorkPlacesModel> children;
 
 
     @ManyToOne
     @JoinColumn(name = "ID_ORGANIZATION")
-    private OgOrganizationsModel organization;
+    private OgOrganizationsModel id_organization;
 
     @ManyToOne
     @JoinColumn(name="ID_WORK_PLACE_TYPE")
-    private OgWorkPlaceTypes workPlaceType;
+    private OgWorkPlaceTypes id_work_place_type;
 
     @JsonBackReference
     @OneToMany(mappedBy = "id_work_place")
@@ -45,14 +45,14 @@ public class OgWorkPlacesModel implements Serializable {
     public OgWorkPlacesModel() {
     }
 
-    public OgWorkPlacesModel(String code, String name, String description, OgWorkPlacesModel parent, Collection<OgWorkPlacesModel> children, OgOrganizationsModel organization, OgWorkPlaceTypes workPlaceType, Collection<AtVacancyModel> vacancies) {
+    public OgWorkPlacesModel(String code, String name, String description, OgWorkPlacesModel id_parent, Collection<OgWorkPlacesModel> children, OgOrganizationsModel id_organization, OgWorkPlaceTypes id_work_place_type, Collection<AtVacancyModel> vacancies) {
         this.code = code;
         this.name = name;
         this.description = description;
-        this.parent = parent;
+        this.id_parent = id_parent;
         this.children = children;
-        this.organization = organization;
-        this.workPlaceType = workPlaceType;
+        this.id_organization = id_organization;
+        this.id_work_place_type = id_work_place_type;
         this.vacancies = vacancies;
     }
 
@@ -88,12 +88,12 @@ public class OgWorkPlacesModel implements Serializable {
         this.description = description;
     }
 
-    public OgWorkPlacesModel getParent() {
-        return parent;
+    public OgWorkPlacesModel getId_parent() {
+        return id_parent;
     }
 
-    public void setParent(OgWorkPlacesModel parent) {
-        this.parent = parent;
+    public void setId_parent(OgWorkPlacesModel id_parent) {
+        this.id_parent = id_parent;
     }
 
     public Collection<OgWorkPlacesModel> getChildren() {
@@ -104,20 +104,20 @@ public class OgWorkPlacesModel implements Serializable {
         this.children = children;
     }
 
-    public OgOrganizationsModel getOrganization() {
-        return organization;
+    public OgOrganizationsModel getId_organization() {
+        return id_organization;
     }
 
-    public void setOrganization(OgOrganizationsModel organization) {
-        this.organization = organization;
+    public void setId_organization(OgOrganizationsModel id_organization) {
+        this.id_organization = id_organization;
     }
 
-    public OgWorkPlaceTypes getWorkPlaceType() {
-        return workPlaceType;
+    public OgWorkPlaceTypes getId_work_place_type() {
+        return id_work_place_type;
     }
 
-    public void setWorkPlaceType(OgWorkPlaceTypes workPlaceType) {
-        this.workPlaceType = workPlaceType;
+    public void setId_work_place_type(OgWorkPlaceTypes id_work_place_type) {
+        this.id_work_place_type = id_work_place_type;
     }
 
     public Collection<AtVacancyModel> getVacancies() {

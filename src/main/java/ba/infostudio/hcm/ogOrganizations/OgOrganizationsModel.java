@@ -17,36 +17,38 @@ public class OgOrganizationsModel {
     private String code;
     private String name;
     private String description;
-//LEGALLENTITY PLACEHODER
+//LEGALENTITY PLACEHOLDER
     @ManyToOne
     @JoinColumn(name = "ID_PARENT")
-    private OgOrganizationsModel parent;
-    @OneToMany(mappedBy = "parent")
+    private OgOrganizationsModel id_parent;
+
+    @OneToMany(mappedBy = "id_parent")
     @JsonBackReference
     private Collection<OgOrganizationsModel> children;
+
     private String created_by;
     private String created_at;
     private String updated_by;
     private String updated_at;
 
-    @OneToMany(mappedBy = "organization")
+    @OneToMany(mappedBy = "id_organization")
     @JsonBackReference
-    private Collection<OgWorkPlacesModel> workPlaces;
+    private Collection<OgWorkPlacesModel> id_work_places;
 
     public OgOrganizationsModel() {
     }
 
-    public OgOrganizationsModel(String code, String name, String description, OgOrganizationsModel parent, Collection<OgOrganizationsModel> children, String created_by, String created_at, String updated_by, String updated_at, Collection<OgWorkPlacesModel> workPlaces) {
+    public OgOrganizationsModel(String code, String name, String description, OgOrganizationsModel id_parent, Collection<OgOrganizationsModel> children, String created_by, String created_at, String updated_by, String updated_at, Collection<OgWorkPlacesModel> id_work_places) {
         this.code = code;
         this.name = name;
         this.description = description;
-        this.parent = parent;
+        this.id_parent = id_parent;
         this.children = children;
         this.created_by = created_by;
         this.created_at = created_at;
         this.updated_by = updated_by;
         this.updated_at = updated_at;
-        this.workPlaces = workPlaces;
+        this.id_work_places = id_work_places;
     }
 
     public Long getId() {
@@ -81,12 +83,12 @@ public class OgOrganizationsModel {
         this.description = description;
     }
 
-    public OgOrganizationsModel getParent() {
-        return parent;
+    public OgOrganizationsModel getId_parent() {
+        return id_parent;
     }
 
-    public void setParent(OgOrganizationsModel parent) {
-        this.parent = parent;
+    public void setId_parent(OgOrganizationsModel id_parent) {
+        this.id_parent = id_parent;
     }
 
     public Collection<OgOrganizationsModel> getChildren() {
@@ -129,11 +131,11 @@ public class OgOrganizationsModel {
         this.updated_at = updated_at;
     }
 
-    public Collection<OgWorkPlacesModel> getWorkPlaces() {
-        return workPlaces;
+    public Collection<OgWorkPlacesModel> getId_work_places() {
+        return id_work_places;
     }
 
-    public void setWorkPlaces(Collection<OgWorkPlacesModel> workPlaces) {
-        this.workPlaces = workPlaces;
+    public void setId_work_places(Collection<OgWorkPlacesModel> id_work_places) {
+        this.id_work_places = id_work_places;
     }
 }
