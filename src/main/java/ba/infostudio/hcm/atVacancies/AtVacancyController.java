@@ -28,6 +28,14 @@ public class AtVacancyController {
         return this.atVacancyRepository.save(atVacancyModel);
     }
 
+    @RequestMapping(value = "", method=RequestMethod.PUT, produces={"application/json"})
+    public @ResponseBody boolean updateAtVacancy(@RequestBody AtVacancyModel vacancy) {
+        this.atVacancyService.updateAtVacancy(vacancy);
+
+        return true;
+    }
+
+
 
 
 
