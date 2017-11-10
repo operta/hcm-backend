@@ -26,8 +26,8 @@ public class OgWorkPlacesModel implements Serializable {
     @JoinColumn(name = "ID_PARENT")
     private OgWorkPlacesModel id_parent;
 
+    @JsonBackReference("id_parent2")
     @OneToMany(mappedBy = "id_parent")
-    @JsonBackReference
     private Collection<OgWorkPlacesModel> children;
 
 
@@ -44,7 +44,7 @@ public class OgWorkPlacesModel implements Serializable {
     private String updated_by;
     private Timestamp updated_at;
 
-    @JsonBackReference
+    @JsonBackReference(value = "id_work_place")
     @OneToMany(mappedBy = "id_work_place")
     private Collection<AtVacancyModel> vacancies;
 

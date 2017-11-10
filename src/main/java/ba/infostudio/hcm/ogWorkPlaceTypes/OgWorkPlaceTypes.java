@@ -1,39 +1,42 @@
 package ba.infostudio.hcm.ogWorkPlaceTypes;
 
+import ba.infostudio.hcm.ogWorkPlaces.OgWorkPlacesModel;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.lang.reflect.Field;
 import java.sql.Timestamp;
+import java.util.Collection;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "OG_WORK_PLACE_TYPES")
 
 public class OgWorkPlaceTypes {
-	@Id
-	@SequenceGenerator(name="OID", sequenceName="OID", allocationSize=1)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="OID")	
-	private Long   id;
+    @Id
+    @SequenceGenerator(name = "OID", sequenceName = "OID", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "OID")
+    private Long id;
 
-	private String code;
+    private String code;
 
-	private String name;
+    private String name;
 
-	private String description;
+    private String description;
 
     private String created_by;
     private Timestamp created_at;
     private String updated_by;
     private Timestamp updated_at;
-	
-	public OgWorkPlaceTypes() {}
 
-    public OgWorkPlaceTypes(String code, String name, String description, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
+    @JsonBackReference(value = "id_work_place_type")
+    @OneToMany(mappedBy = "id_work_place_type")
+    private Collection<OgWorkPlacesModel> workPlaces;
+
+    public OgWorkPlaceTypes() {
+    }
+
+    public OgWorkPlaceTypes(String code, String name, String description, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<OgWorkPlacesModel> workPlaces) {
         this.code = code;
         this.name = name;
         this.description = description;
@@ -41,6 +44,7 @@ public class OgWorkPlaceTypes {
         this.created_at = created_at;
         this.updated_by = updated_by;
         this.updated_at = updated_at;
+        this.workPlaces = workPlaces;
     }
 
     public Long getId() {
@@ -105,6 +109,14 @@ public class OgWorkPlaceTypes {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public Collection<OgWorkPlacesModel> getWorkPlaces() {
+        return workPlaces;
+    }
+
+    public void setWorkPlaces(Collection<OgWorkPlacesModel> workPlaces) {
+        this.workPlaces = workPlaces;
     }
 }
 

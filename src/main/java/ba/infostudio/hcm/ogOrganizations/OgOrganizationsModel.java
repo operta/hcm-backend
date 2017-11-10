@@ -1,6 +1,7 @@
 package ba.infostudio.hcm.ogOrganizations;
 
 
+import ba.infostudio.hcm.leLegalEntities.LeLegalEntitiesModel;
 import ba.infostudio.hcm.ogWorkPlaces.OgWorkPlacesModel;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -17,13 +18,17 @@ public class OgOrganizationsModel {
     private String code;
     private String name;
     private String description;
-//LEGALENTITY PLACEHOLDER
+
+    @ManyToOne
+    @JoinColumn(name="ID_LEGAL_ENTITY")
+    private LeLegalEntitiesModel id_legal_entity;
+
     @ManyToOne
     @JoinColumn(name = "ID_PARENT")
     private OgOrganizationsModel id_parent;
 
+    @JsonBackReference("parent")
     @OneToMany(mappedBy = "id_parent")
-    @JsonBackReference
     private Collection<OgOrganizationsModel> children;
 
     private String created_by;
@@ -31,17 +36,18 @@ public class OgOrganizationsModel {
     private String updated_by;
     private String updated_at;
 
+    @JsonBackReference("id_organization")
     @OneToMany(mappedBy = "id_organization")
-    @JsonBackReference
     private Collection<OgWorkPlacesModel> id_work_places;
 
     public OgOrganizationsModel() {
     }
 
-    public OgOrganizationsModel(String code, String name, String description, OgOrganizationsModel id_parent, Collection<OgOrganizationsModel> children, String created_by, String created_at, String updated_by, String updated_at, Collection<OgWorkPlacesModel> id_work_places) {
+    public OgOrganizationsModel(String code, String name, String description, LeLegalEntitiesModel id_legal_entity, OgOrganizationsModel id_parent, Collection<OgOrganizationsModel> children, String created_by, String created_at, String updated_by, String updated_at, Collection<OgWorkPlacesModel> id_work_places) {
         this.code = code;
         this.name = name;
         this.description = description;
+        this.id_legal_entity = id_legal_entity;
         this.id_parent = id_parent;
         this.children = children;
         this.created_by = created_by;
@@ -81,6 +87,14 @@ public class OgOrganizationsModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LeLegalEntitiesModel getId_legal_entity() {
+        return id_legal_entity;
+    }
+
+    public void setId_legal_entity(LeLegalEntitiesModel id_legal_entity) {
+        this.id_legal_entity = id_legal_entity;
     }
 
     public OgOrganizationsModel getId_parent() {

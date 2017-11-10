@@ -3,7 +3,6 @@ package ba.infostudio.hcm.atVacancies;
 import ba.infostudio.hcm.ogWorkPlaces.OgWorkPlacesModel;
 import ba.infostudio.hcm.rgRegions.RgRegionsModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,7 +27,6 @@ public class AtVacancyModel implements Serializable{
     private Date date_from;
     private Date date_to;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "ID_WORK_PLACE")
     private OgWorkPlacesModel id_work_place;
