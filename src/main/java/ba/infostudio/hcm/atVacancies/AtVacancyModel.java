@@ -21,7 +21,6 @@ public class AtVacancyModel implements Serializable{
     private String name;
     private String description;
 
-    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "ID_LOCATION")
     private RgRegionsModel id_location;

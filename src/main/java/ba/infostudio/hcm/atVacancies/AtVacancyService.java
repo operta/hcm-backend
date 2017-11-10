@@ -35,6 +35,7 @@ public class AtVacancyService {
         vacancy.setCode(vac.getCode());
         vacancy.setDate_from(vac.getDate_from());
         vacancy.setDate_to(vac.getDate_to());
+        vacancy.setId_location(vac.getId_location());
 
         System.out.println("AFTER NAME CHANGE MODEL FROM DB ______________");
         System.out.println(vacancy.toString());
