@@ -12,8 +12,6 @@ import javax.validation.Valid;
 public class AtVacancyController {
     @Autowired
     private AtVacancyService atVacancyService;
-    @Autowired
-    private AtVacancyRepository atVacancyRepository;
 
 
     @GetMapping("")
@@ -24,18 +22,8 @@ public class AtVacancyController {
 
     @PostMapping(value = "/add")
     public AtVacancyModel addVacancy(@RequestBody AtVacancyModel atVacancyModel) {
-        System.out.println("bla");
-        return this.atVacancyRepository.save(atVacancyModel);
+        return this.atVacancyService.newVacancy(atVacancyModel);
     }
-
-    @RequestMapping(value = "", method=RequestMethod.PUT, produces={"application/json"})
-    public @ResponseBody boolean updateAtVacancy(@RequestBody AtVacancyModel vacancy) {
-        this.atVacancyService.updateAtVacancy(vacancy);
-
-        return true;
-    }
-
-
 
 
 

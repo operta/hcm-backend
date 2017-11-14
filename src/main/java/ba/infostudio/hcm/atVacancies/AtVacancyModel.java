@@ -23,6 +23,7 @@ public class AtVacancyModel implements Serializable{
     @OneToOne
     @JoinColumn(name = "ID_LOCATION")
     private RgRegionsModel id_location;
+
     private Date date_from;
     private Date date_to;
 

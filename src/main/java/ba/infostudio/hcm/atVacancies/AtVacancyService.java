@@ -45,4 +45,8 @@ public class AtVacancyService {
         System.out.println("END MESSAGE ______________");
         return vacancy;
     }
+
+    public AtVacancyModel newVacancy(AtVacancyModel vacancy) {
+        return this.atVacancyRepository.save(vacancy);
+    }
 }
