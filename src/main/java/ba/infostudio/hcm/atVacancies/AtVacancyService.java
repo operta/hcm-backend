@@ -20,29 +20,18 @@ public class AtVacancyService {
     }
 
     public AtVacancyModel updateAtVacancy (AtVacancyModel vac){
-        System.out.println("START MESSAGE ______________");
-
-        System.out.println("RECEIVED DATA ______________");
-        System.out.println(vac.toString());
-
-
         AtVacancyModel vacancy = atVacancyRepository.findOne(vac.getId());
 
-        System.out.println("MODEL FROM DB ______________");
-        System.out.println(vacancy.toString());
         vacancy.setName(vac.getName());
         vacancy.setDescription(vac.getDescription());
         vacancy.setCode(vac.getCode());
         vacancy.setDate_from(vac.getDate_from());
         vacancy.setDate_to(vac.getDate_to());
         vacancy.setId_location(vac.getId_location());
-
-        System.out.println("AFTER NAME CHANGE MODEL FROM DB ______________");
-        System.out.println(vacancy.toString());
+        vacancy.setId_work_place(vac.getId_work_place());
 
         atVacancyRepository.save(vacancy);
 
-        System.out.println("END MESSAGE ______________");
         return vacancy;
     }
 
