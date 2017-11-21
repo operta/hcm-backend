@@ -1,17 +1,28 @@
 package ba.infostudio.hcm.atVacancies;
 
+import ba.infostudio.hcm.atJobApplications.AtJobApplicationModel;
 import ba.infostudio.hcm.ogWorkPlaces.OgWorkPlacesModel;
 import ba.infostudio.hcm.rgRegions.RgRegionsModel;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Date;
 
+/*@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+/*
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property="@UUID")
+*/
+@JsonIdentityInfo(generator=JSOGGenerator.class)
 @Entity
 @Table(name = "AT_VACANCIES")
-public class AtVacancyModel implements Serializable{
+public class AtVacancyModel {
     @Id
     @SequenceGenerator(name="OID", sequenceName="OID", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="OID")
@@ -36,10 +47,13 @@ public class AtVacancyModel implements Serializable{
     private Timestamp updated_at;
 
 
+    @OneToMany(mappedBy = "id_vacancies")
+    private Collection<AtJobApplicationModel> jobApplications;
+
     public AtVacancyModel() {
     }
 
-    public AtVacancyModel(String code, String name, String description, RgRegionsModel id_location, Date date_from, Date date_to, OgWorkPlacesModel id_work_place, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
+    public AtVacancyModel(String code, String name, String description, RgRegionsModel id_location, Date date_from, Date date_to, OgWorkPlacesModel id_work_place, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<AtJobApplicationModel> jobApplications) {
         this.code = code;
         this.name = name;
         this.description = description;
@@ -51,6 +65,7 @@ public class AtVacancyModel implements Serializable{
         this.created_at = created_at;
         this.updated_by = updated_by;
         this.updated_at = updated_at;
+        this.jobApplications = jobApplications;
     }
 
     public Long getId() {
@@ -165,5 +180,13 @@ public class AtVacancyModel implements Serializable{
                 ", updated_by='" + updated_by + '\'' +
                 ", updated_at=" + updated_at +
                 '}';
+    }
+
+    public Collection<AtJobApplicationModel> getJobApplications() {
+        return jobApplications;
+    }
+
+    public void setJobApplications(Collection<AtJobApplicationModel> jobApplications) {
+        this.jobApplications = jobApplications;
     }
 }

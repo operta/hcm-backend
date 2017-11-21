@@ -19,6 +19,11 @@ public class AtVacancyController {
         return this.atVacancyService.getAllVacancies();
     }
 
+    @GetMapping("/{id}")
+    public @ResponseBody AtVacancyModel getVacancy(@PathVariable String id) {
+        return this.atVacancyService.getVacancy(Long.valueOf(id));
+    }
+
 
     @PostMapping(value = "/add")
     public AtVacancyModel addVacancy(@RequestBody AtVacancyModel atVacancyModel) {
