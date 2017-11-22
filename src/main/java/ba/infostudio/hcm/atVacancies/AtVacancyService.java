@@ -14,10 +14,15 @@ public class AtVacancyService {
         return this.atVacancyRepository.findAll();
     }
 
+    public AtVacancyModel getVacancy(Long id){
+        return this.atVacancyRepository.findOne(id);
+    }
 
     public AtVacancyModel addVacancy(AtVacancyModel atVacancyModel){
         return this.atVacancyRepository.save(atVacancyModel);
     }
+
+
 
     public AtVacancyModel updateAtVacancy (AtVacancyModel vac){
         AtVacancyModel vacancy = atVacancyRepository.findOne(vac.getId());
