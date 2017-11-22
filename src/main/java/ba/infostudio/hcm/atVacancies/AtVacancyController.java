@@ -13,7 +13,6 @@ public class AtVacancyController {
     @Autowired
     private AtVacancyService atVacancyService;
 
-
     @GetMapping("")
     public @ResponseBody Iterable<AtVacancyModel> getAllVacancies(){
         return this.atVacancyService.getAllVacancies();
@@ -30,6 +29,10 @@ public class AtVacancyController {
         return this.atVacancyService.newVacancy(atVacancyModel);
     }
 
+    @RequestMapping(value = "", method=RequestMethod.PUT, produces={"application/json"})
+    public @ResponseBody boolean updateAtVacancy(@RequestBody AtVacancyModel vacancy) {
+        this.atVacancyService.updateAtVacancy(vacancy);
 
-
+        return true;
+    }
 }

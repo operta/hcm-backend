@@ -1,22 +1,30 @@
 package ba.infostudio.hcm.atApplicants;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/applicants")
+@CrossOrigin("*")
 public class AtApplicantController {
     @Autowired
-    private AtApplicantRepository atApplicantRepository;
+    private AtApplicantService atApplicantService;
 
     @GetMapping("")
-    public Iterable<AtApplicantModel> getApplicants() {
-        return this.atApplicantRepository.findAll();
+    public @ResponseBody Iterable<AtApplicantModel> getAllApplicants(){
+        return this.atApplicantService.getAllApplicants();
     }
 
+
+    @PostMapping(value = "/add")
+    public AtApplicantModel addApplicant(@RequestBody AtApplicantModel atApplicantModel) {
+        return this.atApplicantService.addApplicant(atApplicantModel);
+    }
+
+    @RequestMapping(value = "", method=RequestMethod.PUT, produces={"application/json"})
+    public @ResponseBody boolean updateApplicant(@RequestBody AtApplicantModel applicant) {
+        this.atApplicantService.updateApplicant(applicant);
+
+        return true;
+    }
 }
