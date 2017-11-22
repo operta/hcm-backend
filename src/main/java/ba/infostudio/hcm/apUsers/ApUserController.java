@@ -26,15 +26,11 @@ public class ApUserController {
     @RequestMapping("/{username}")
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public ApUserModel getUser(@PathVariable String username) {
-        System.out.print("ID___________");
-        System.out.print(username);
         return this.apUserRepository.findByUsername(username);
     }
 
     @PostMapping(value = "/add")
     public ApUserModel addUser(@RequestBody ApUserModel apUserModel) {
-        System.out.print("MODEL_______________");
-        System.out.print(apUserModel.toString());
         return this.apUserService.addUser(apUserModel);
     }
 

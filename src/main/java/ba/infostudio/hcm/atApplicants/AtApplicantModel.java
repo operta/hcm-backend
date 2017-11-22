@@ -23,7 +23,7 @@ public class AtApplicantModel implements  Serializable{
     private String maiden_name;
     private String gender;
     private Date birthdate;
-    private String martial_status;
+    private String marital_status;
     private String address;
     private String employed;
     private String description;
@@ -37,53 +37,34 @@ public class AtApplicantModel implements  Serializable{
     private String updated_by;
     private Date updated_at;
 
-//    @JsonIgnore
-//    @OneToOne
-//    @JoinColumn(name = "ID_USER")
-//    private ApUserModel id_user;
-//
+
+    @OneToOne
+    @JoinColumn(name = "ID_USER")
+    private ApUserModel idUser;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_REGION")
+    private RgRegionsModel id_region;
+
+
 //    @JsonIgnore
 //    @OneToOne
 //    @JoinColumn(name = "ID_COUNTRY")
 //    private RgRegionsModel id_country;
 //
-//    @JsonIgnore
-//    @OneToOne
-//    @JoinColumn(name = "ID_REGION")
-//    private RgRegionsModel id_region;
+//
 //
 //    @JsonIgnore
 //    @OneToOne
 //    @JoinColumn(name = "ID_CITY")
 //    private RgRegionsModel id_city;
-//
+////
 //    @JsonIgnore
 //    @OneToOne
 //    @JoinColumn(name = "ID_QUALIFICATION")
 //    private long id_qualification;
 
     public AtApplicantModel(){}
-
-    public AtApplicantModel(String name, String surname, String middle_name, String maiden_name, String gender, Date birthdate, String martial_status, String address, String employed, String description, String employment_position, String industry, String phone_number, String email, String created_by, Date created_at, String updated_by, Date updated_at) {
-        this.name = name;
-        this.surname = surname;
-        this.middle_name = middle_name;
-        this.maiden_name = maiden_name;
-        this.gender = gender;
-        this.birthdate = birthdate;
-        this.martial_status = martial_status;
-        this.address = address;
-        this.employed = employed;
-        this.description = description;
-        this.employment_position = employment_position;
-        this.industry = industry;
-        this.phone_number = phone_number;
-        this.email = email;
-        this.created_by = created_by;
-        this.created_at = created_at;
-        this.updated_by = updated_by;
-        this.updated_at = updated_at;
-    }
 
     public Long getId() {
         return id;
@@ -141,12 +122,12 @@ public class AtApplicantModel implements  Serializable{
         this.birthdate = birthdate;
     }
 
-    public String getMartial_status() {
-        return martial_status;
+    public String getMarital_status() {
+        return marital_status;
     }
 
-    public void setMartial_status(String martial_status) {
-        this.martial_status = martial_status;
+    public void setMarital_status(String marital_status) {
+        this.marital_status = marital_status;
     }
 
     public String getAddress() {
@@ -235,5 +216,44 @@ public class AtApplicantModel implements  Serializable{
 
     public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public ApUserModel getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(ApUserModel idUser) {
+        this.idUser = idUser;
+    }
+
+    public RgRegionsModel getId_region() {
+        return id_region;
+    }
+
+    public void setId_region(RgRegionsModel id_region) {
+        this.id_region = id_region;
+    }
+
+    public AtApplicantModel(String name, String surname, String middle_name, String maiden_name, String gender, Date birthdate, String marital_status, String address, String employed, String description, String employment_position, String industry, String phone_number, String email, String created_by, Date created_at, String updated_by, Date updated_at, ApUserModel idUser, RgRegionsModel id_region) {
+        this.name = name;
+        this.surname = surname;
+        this.middle_name = middle_name;
+        this.maiden_name = maiden_name;
+        this.gender = gender;
+        this.birthdate = birthdate;
+        this.marital_status = marital_status;
+        this.address = address;
+        this.employed = employed;
+        this.description = description;
+        this.employment_position = employment_position;
+        this.industry = industry;
+        this.phone_number = phone_number;
+        this.email = email;
+        this.created_by = created_by;
+        this.created_at = created_at;
+        this.updated_by = updated_by;
+        this.updated_at = updated_at;
+        this.idUser = idUser;
+        this.id_region = id_region;
     }
 }
