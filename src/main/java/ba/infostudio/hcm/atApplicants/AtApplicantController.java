@@ -22,15 +22,15 @@ public class AtApplicantController {
 
     @GetMapping("/{id}")
     public AtApplicantModel getApplicant(@PathVariable String id, HttpServletResponse response) {
-//        System.out.print("ID___________");
-//        System.out.print(id);
-//        System.out.println("GET APPLICANT CONTROLLER__________");
-//        System.out.print(this.atApplicantService.getApplicant(id));
-//        AtApplicantModel applicant = this.atApplicantService.getApplicant(id);
-//        if(applicant == null){
-//            System.out.println("NO APPLICANT__________");
-//            response.setStatus(204);
-//        }
+        System.out.print("ID___________");
+        System.out.print(id);
+        System.out.println("GET APPLICANT CONTROLLER__________");
+        System.out.print(this.atApplicantService.getApplicant(id));
+        AtApplicantModel applicant = this.atApplicantService.getApplicant(id);
+        if(applicant == null){
+            System.out.println("NO APPLICANT__________");
+            response.setStatus(204);
+        }
         return this.atApplicantService.getApplicant(id);
     }
 

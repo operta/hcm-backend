@@ -1,5 +1,8 @@
 package ba.infostudio.hcm.rgRegions;
 
+import ba.infostudio.hcm.atApplicants.AtApplicantModel;
+import ba.infostudio.hcm.ogWorkPlaceTypes.OgWorkPlaceTypes;
+import ba.infostudio.hcm.rgRegionTypes.RgRegionTypesModel;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -21,7 +24,9 @@ public class RgRegionsModel implements Serializable {
 
     private String description;
 
-    private Long id_type;
+    @ManyToOne
+    @JoinColumn(name="ID_TYPE")
+    private RgRegionTypesModel idType;
 
     @ManyToOne
     @JoinColumn(name = "ID_PARENT")
@@ -37,15 +42,13 @@ public class RgRegionsModel implements Serializable {
     private Timestamp updated_at;
 
 
-    public RgRegionsModel() {
+    public RgRegionsModel() {}
 
-    }
-
-    public RgRegionsModel(String code, String name, String description, Long id_type, RgRegionsModel id_parent, Collection<RgRegionsModel> children, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
+    public RgRegionsModel(String code, String name, String description, RgRegionTypesModel idType, RgRegionsModel id_parent, Collection<RgRegionsModel> children, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
         this.code = code;
         this.name = name;
         this.description = description;
-        this.id_type = id_type;
+        this.idType = idType;
         this.id_parent = id_parent;
         this.children = children;
         this.created_by = created_by;
@@ -86,12 +89,12 @@ public class RgRegionsModel implements Serializable {
         this.description = description;
     }
 
-    public Long getId_type() {
-        return id_type;
+    public RgRegionTypesModel getIdType() {
+        return idType;
     }
 
-    public void setId_type(Long id_type) {
-        this.id_type = id_type;
+    public void setIdType(RgRegionTypesModel idType) {
+        this.idType = idType;
     }
 
     public RgRegionsModel getId_parent() {

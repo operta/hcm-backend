@@ -18,4 +18,23 @@ public class RgRegionsController {
         return this.rgRegionsRepository.findAll();
     }
 
+    @RequestMapping("/regions/cities")
+    public @ResponseBody Iterable<RgRegionsModel> getAllCities(){
+        return this.rgRegionsRepository.findByIdType_name("City");
+    }
+
+    @RequestMapping("/regions/states")
+    public @ResponseBody Iterable<RgRegionsModel> getAllStates(){
+        return this.rgRegionsRepository.findByIdType_name("State");
+    }
+
+    @RequestMapping("/regions/countries")
+    public @ResponseBody Iterable<RgRegionsModel> getAllCountries(){
+        return this.rgRegionsRepository.findByIdType_name("Country");
+    }
+    @RequestMapping("/regions/regions")
+    public @ResponseBody Iterable<RgRegionsModel> getAllRRegions(){
+        return this.rgRegionsRepository.findByIdType_name("Region");
+    }
+
 }

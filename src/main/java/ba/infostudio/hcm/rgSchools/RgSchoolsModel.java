@@ -1,21 +1,13 @@
-package ba.infostudio.hcm.rgRegionTypes;
+package ba.infostudio.hcm.rgSchools;
 
-import ba.infostudio.hcm.atJobApplications.AtJobApplicationModel;
-import ba.infostudio.hcm.ogWorkPlaces.OgWorkPlacesModel;
 import ba.infostudio.hcm.rgRegions.RgRegionsModel;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
 
 @Entity
-@Table(name = "RG_REGION_TYPES")
-
-public class RgRegionTypesModel implements Serializable {
+@Table(name = "RG_SCHOOLS")
+public class RgSchoolsModel {
     @Id
     @SequenceGenerator(name="OID", sequenceName="OID", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="OID")
@@ -23,17 +15,25 @@ public class RgRegionTypesModel implements Serializable {
     private String code;
     private String name;
     private String description;
+    private String address;
     private String created_by;
     private Timestamp created_at;
     private String updated_by;
     private Timestamp updated_at;
 
-    @OneToMany(mappedBy = "idType", fetch = FetchType.LAZY)
-    @JsonBackReference(value = "id_type")
-    private Collection<RgRegionsModel> regions;
+    @OneToOne
+    @JoinColumn(name = "ID_COUNTRY")
+    private RgRegionsModel id_country;
 
-    public RgRegionTypesModel() {
-    }
+    @OneToOne
+    @JoinColumn(name = "ID_REGION")
+    private RgRegionsModel id_region;
+
+    @OneToOne
+    @JoinColumn(name = "ID_CITY")
+    private RgRegionsModel id_city;
+
+    public RgSchoolsModel(){}
 
     public Long getId() {
         return id;
@@ -65,6 +65,14 @@ public class RgRegionTypesModel implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getCreated_by() {
@@ -99,22 +107,43 @@ public class RgRegionTypesModel implements Serializable {
         this.updated_at = updated_at;
     }
 
-    public Collection<RgRegionsModel> getRegions() {
-        return regions;
+    public RgRegionsModel getId_country() {
+        return id_country;
     }
 
-    public void setRegions(Collection<RgRegionsModel> regions) {
-        this.regions = regions;
+    public void setId_country(RgRegionsModel id_country) {
+        this.id_country = id_country;
     }
 
-    public RgRegionTypesModel(String code, String name, String description, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<RgRegionsModel> regions) {
+    public RgRegionsModel getId_region() {
+        return id_region;
+    }
+
+    public void setId_region(RgRegionsModel id_region) {
+        this.id_region = id_region;
+    }
+
+    public RgRegionsModel getId_city() {
+        return id_city;
+    }
+
+    public void setId_city(RgRegionsModel id_city) {
+        this.id_city = id_city;
+    }
+
+    public RgSchoolsModel(String code, String name, String description, String address, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, RgRegionsModel id_country, RgRegionsModel id_region, RgRegionsModel id_city) {
         this.code = code;
         this.name = name;
         this.description = description;
+        this.address = address;
         this.created_by = created_by;
         this.created_at = created_at;
         this.updated_by = updated_by;
         this.updated_at = updated_at;
-        this.regions = regions;
+        this.id_country = id_country;
+        this.id_region = id_region;
+        this.id_city = id_city;
     }
 }
+
+
