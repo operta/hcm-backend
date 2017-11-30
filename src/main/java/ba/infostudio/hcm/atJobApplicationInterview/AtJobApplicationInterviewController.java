@@ -12,7 +12,7 @@ public class AtJobApplicationInterviewController {
     private AtJobApplicationInterviewRepository atJobApplicationInterviewRepository;
 
     @GetMapping("")
-    public Iterable<AtJobApplicationInterviewModel> getAll(){
+    public @ResponseBody Iterable<AtJobApplicationInterviewModel> getAll(){
         return this.atJobApplicationInterviewRepository.findAll();
     }
 }

@@ -1,12 +1,11 @@
 package ba.infostudio.hcm.atApplicants;
 
+import ba.infostudio.hcm.apUsers.ApUserModel;
 import ba.infostudio.hcm.atJobApplications.AtJobApplicationModel;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
@@ -36,7 +35,9 @@ public class AtApplicantModel {
     private String description;
     private String employment_position;
     private String industry;
-    private Long id_user;
+    @OneToOne
+    @JoinColumn(name = "ID_USER")
+    private ApUserModel idUser;
     private String created_by;
     private Timestamp created_at;
     private String updated_by;
@@ -52,7 +53,7 @@ public class AtApplicantModel {
     public AtApplicantModel() {
     }
 
-    public AtApplicantModel(String name, String surname, String middle_name, String maiden_name, String gender, Date birthdate, String marital_status, Long id_country, Long id_region, Long id_city, String address, Long id_employee, String description, String employment_position, String industry, Long id_user, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, String phone_number, String email, Collection<AtJobApplicationModel> jobApplications) {
+    public AtApplicantModel(String name, String surname, String middle_name, String maiden_name, String gender, Date birthdate, String marital_status, Long id_country, Long id_region, Long id_city, String address, Long id_employee, String description, String employment_position, String industry, ApUserModel idUser, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, String phone_number, String email, Collection<AtJobApplicationModel> jobApplications) {
         this.name = name;
         this.surname = surname;
         this.middle_name = middle_name;
@@ -68,7 +69,7 @@ public class AtApplicantModel {
         this.description = description;
         this.employment_position = employment_position;
         this.industry = industry;
-        this.id_user = id_user;
+        this.idUser = idUser;
         this.created_by = created_by;
         this.created_at = created_at;
         this.updated_by = updated_by;
@@ -206,12 +207,12 @@ public class AtApplicantModel {
         this.industry = industry;
     }
 
-    public Long getId_user() {
-        return id_user;
+    public ApUserModel getIdUser() {
+        return idUser;
     }
 
-    public void setId_user(Long id_user) {
-        this.id_user = id_user;
+    public void setIdUser(ApUserModel idUser) {
+        this.idUser = idUser;
     }
 
     public String getCreated_by() {
@@ -246,14 +247,6 @@ public class AtApplicantModel {
         this.updated_at = updated_at;
     }
 
-    public Collection<AtJobApplicationModel> getJobApplications() {
-        return jobApplications;
-    }
-
-    public void setJobApplications(Collection<AtJobApplicationModel> jobApplications) {
-        this.jobApplications = jobApplications;
-    }
-
     public String getPhone_number() {
         return phone_number;
     }
@@ -268,5 +261,13 @@ public class AtApplicantModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Collection<AtJobApplicationModel> getJobApplications() {
+        return jobApplications;
+    }
+
+    public void setJobApplications(Collection<AtJobApplicationModel> jobApplications) {
+        this.jobApplications = jobApplications;
     }
 }

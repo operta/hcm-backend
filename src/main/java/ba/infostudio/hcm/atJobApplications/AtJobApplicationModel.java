@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 
 /*@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -40,18 +41,18 @@ public class AtJobApplicationModel implements Serializable {
     private Timestamp created_at;
     private String updated_by;
     private Timestamp updated_at;
+    private Long interview_grade;
+    private Long test_grade;
 
-    @OneToOne
-    @JoinColumn(name = "TEST")
-    private AtJobApplicationTestModel test;
-    @OneToOne
-    @JoinColumn(name = "INTERVIEW")
-    private AtJobApplicationInterviewModel interview;
+    @OneToMany(mappedBy = "job_application_id")
+    private Collection<AtJobApplicationTestModel> test;
+    @OneToMany(mappedBy = "job_application_id")
+    private Collection<AtJobApplicationInterviewModel> interview;
 
     public AtJobApplicationModel() {
     }
 
-    public AtJobApplicationModel(AtApplicantModel id_applicant, AtVacancyModel id_vacancies, Long id_status, Long grade, String review, Date date_applied, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, AtJobApplicationTestModel test, AtJobApplicationInterviewModel interview) {
+    public AtJobApplicationModel(AtApplicantModel id_applicant, AtVacancyModel id_vacancies, Long id_status, Long grade, String review, Date date_applied, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Long interview_grade, Long test_grade, Collection<AtJobApplicationTestModel> test, Collection<AtJobApplicationInterviewModel> interview) {
         this.id_applicant = id_applicant;
         this.id_vacancies = id_vacancies;
         this.id_status = id_status;
@@ -62,6 +63,8 @@ public class AtJobApplicationModel implements Serializable {
         this.created_at = created_at;
         this.updated_by = updated_by;
         this.updated_at = updated_at;
+        this.interview_grade = interview_grade;
+        this.test_grade = test_grade;
         this.test = test;
         this.interview = interview;
     }
@@ -154,19 +157,35 @@ public class AtJobApplicationModel implements Serializable {
         this.updated_at = updated_at;
     }
 
-    public AtJobApplicationTestModel getTest() {
-        return test;
-    }
-
-    public void setTest(AtJobApplicationTestModel test) {
-        this.test = test;
-    }
-
-    public AtJobApplicationInterviewModel getInterview() {
+    public Collection<AtJobApplicationInterviewModel> getInterview() {
         return interview;
     }
 
-    public void setInterview(AtJobApplicationInterviewModel interview) {
+    public void setInterview(Collection<AtJobApplicationInterviewModel> interview) {
         this.interview = interview;
+    }
+
+    public Collection<AtJobApplicationTestModel> getTest() {
+        return test;
+    }
+
+    public void setTest(Collection<AtJobApplicationTestModel> test) {
+        this.test = test;
+    }
+
+    public Long getTest_grade() {
+        return test_grade;
+    }
+
+    public void setTest_grade(Long test_grade) {
+        this.test_grade = test_grade;
+    }
+
+    public Long getInterview_grade() {
+        return interview_grade;
+    }
+
+    public void setInterview_grade(Long interview_grade) {
+        this.interview_grade = interview_grade;
     }
 }

@@ -78,7 +78,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/workPlaces/**")
                 .antMatchers("/users/add")
                 .antMatchers("/userStatuses/**")
-                .antMatchers("/applicants/**");
+                .antMatchers("/applicants/**")
+                .antMatchers("/jobApplications/**")
+                .antMatchers("/test/**")
+                .antMatchers("/interview/**");
+
     }
 
     @Bean

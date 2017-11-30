@@ -1,8 +1,12 @@
 package ba.infostudio.hcm.atJobApplicationInterview;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import ba.infostudio.hcm.atJobApplications.AtJobApplicationModel;
+import ba.infostudio.hcm.rgRegions.RgRegionsModel;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "AT_JOB_APPLICATION_INTERVIEW")
@@ -11,14 +15,35 @@ public class AtJobApplicationInterviewModel {
     private Long id;
     private Long grade;
     private String description;
+    private String created_by;
+    private Timestamp created_at;
+    private String updated_by;
+    private Timestamp updated_at;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "JOB_APPLICATION_ID")
+    private AtJobApplicationModel job_application_id;
+
+    private Date interview_date;
+
+    @OneToOne
+    @JoinColumn(name = "LOCATION_ID")
+    private RgRegionsModel location_id;
 
     public AtJobApplicationInterviewModel() {
     }
 
-    public AtJobApplicationInterviewModel(Long id, Long grade, String description) {
+    public AtJobApplicationInterviewModel(Long id, Long grade, String description, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, AtJobApplicationModel job_application_id, Date interview_date, RgRegionsModel location_id) {
         this.id = id;
         this.grade = grade;
         this.description = description;
+        this.created_by = created_by;
+        this.created_at = created_at;
+        this.updated_by = updated_by;
+        this.updated_at = updated_at;
+        this.job_application_id = job_application_id;
+        this.interview_date = interview_date;
+        this.location_id = location_id;
     }
 
     public Long getId() {
@@ -43,5 +68,61 @@ public class AtJobApplicationInterviewModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCreated_by() {
+        return created_by;
+    }
+
+    public void setCreated_by(String created_by) {
+        this.created_by = created_by;
+    }
+
+    public Timestamp getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getUpdated_by() {
+        return updated_by;
+    }
+
+    public void setUpdated_by(String updated_by) {
+        this.updated_by = updated_by;
+    }
+
+    public Timestamp getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(Timestamp updated_at) {
+        this.updated_at = updated_at;
+    }
+
+    public AtJobApplicationModel getJob_application_id() {
+        return job_application_id;
+    }
+
+    public void setJob_application_id(AtJobApplicationModel job_application_id) {
+        this.job_application_id = job_application_id;
+    }
+
+    public Date getInterview_date() {
+        return interview_date;
+    }
+
+    public void setInterview_date(Date interview_date) {
+        this.interview_date = interview_date;
+    }
+
+    public RgRegionsModel getLocation_id() {
+        return location_id;
+    }
+
+    public void setLocation_id(RgRegionsModel location_id) {
+        this.location_id = location_id;
     }
 }

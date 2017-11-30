@@ -1,8 +1,13 @@
 package ba.infostudio.hcm.atJobApplicationTest;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import ba.infostudio.hcm.atJobApplications.AtJobApplicationModel;
+import ba.infostudio.hcm.rgRegions.RgRegionsModel;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+
+import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -15,17 +20,30 @@ public class AtJobApplicationTestModel {
     private Timestamp created_at;
     private String updated_by;
     private Timestamp updated_at;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "JOB_APPLICATION_ID")
+    private AtJobApplicationModel job_application_id;
+
+    private Date test_date;
+
+    @OneToOne
+    @JoinColumn(name = "LOCATION_ID")
+    private RgRegionsModel location_id;
 
     public AtJobApplicationTestModel() {
     }
 
-    public AtJobApplicationTestModel(Long id, Long score, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
+    public AtJobApplicationTestModel(Long id, Long score, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, AtJobApplicationModel job_application_id, Date test_date, RgRegionsModel location_id) {
         this.id = id;
         this.score = score;
         this.created_by = created_by;
         this.created_at = created_at;
         this.updated_by = updated_by;
         this.updated_at = updated_at;
+        this.job_application_id = job_application_id;
+        this.test_date = test_date;
+        this.location_id = location_id;
     }
 
     public Long getId() {
@@ -74,5 +92,29 @@ public class AtJobApplicationTestModel {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public AtJobApplicationModel getJob_application_id() {
+        return job_application_id;
+    }
+
+    public void setJob_application_id(AtJobApplicationModel job_application_id) {
+        this.job_application_id = job_application_id;
+    }
+
+    public RgRegionsModel getLocation_id() {
+        return location_id;
+    }
+
+    public void setLocation_id(RgRegionsModel location_id) {
+        this.location_id = location_id;
+    }
+
+    public Date getTest_date() {
+        return test_date;
+    }
+
+    public void setTest_date(Date test_date) {
+        this.test_date = test_date;
     }
 }

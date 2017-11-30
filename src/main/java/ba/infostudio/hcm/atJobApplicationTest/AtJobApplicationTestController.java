@@ -12,7 +12,7 @@ public class AtJobApplicationTestController {
     private AtJobApplicationTestRepository atJobApplicationTestRepository;
 
     @GetMapping("")
-    public Iterable<AtJobApplicationTestModel> getAll(){
+    public @ResponseBody Iterable<AtJobApplicationTestModel> getAll(){
         return this.atJobApplicationTestRepository.findAll();
     }
 }
