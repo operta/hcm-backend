@@ -1,21 +1,14 @@
-package ba.infostudio.hcm.rgRegionTypes;
+package ba.infostudio.hcm.rgQualifications;
 
-import ba.infostudio.hcm.atJobApplications.AtJobApplicationModel;
-import ba.infostudio.hcm.ogWorkPlaces.OgWorkPlacesModel;
-import ba.infostudio.hcm.rgRegions.RgRegionsModel;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
 
 @Entity
-@Table(name = "RG_REGION_TYPES")
-
-public class RgRegionTypesModel implements Serializable {
+@Table(name = "RG_QUALIFICATIONS")
+public class RgQualificationsModel {
     @Id
     @SequenceGenerator(name="OID", sequenceName="OID", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="OID")
@@ -28,12 +21,7 @@ public class RgRegionTypesModel implements Serializable {
     private String updated_by;
     private Timestamp updated_at;
 
-    @OneToMany(mappedBy = "idType", fetch = FetchType.LAZY)
-    @JsonBackReference(value = "id_type")
-    private Collection<RgRegionsModel> regions;
-
-    public RgRegionTypesModel() {
-    }
+    public RgQualificationsModel(){}
 
     public Long getId() {
         return id;
@@ -99,15 +87,7 @@ public class RgRegionTypesModel implements Serializable {
         this.updated_at = updated_at;
     }
 
-    public Collection<RgRegionsModel> getRegions() {
-        return regions;
-    }
-
-    public void setRegions(Collection<RgRegionsModel> regions) {
-        this.regions = regions;
-    }
-
-    public RgRegionTypesModel(String code, String name, String description, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<RgRegionsModel> regions) {
+    public RgQualificationsModel(String code, String name, String description, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
         this.code = code;
         this.name = name;
         this.description = description;
@@ -115,6 +95,6 @@ public class RgRegionTypesModel implements Serializable {
         this.created_at = created_at;
         this.updated_by = updated_by;
         this.updated_at = updated_at;
-        this.regions = regions;
     }
 }
+

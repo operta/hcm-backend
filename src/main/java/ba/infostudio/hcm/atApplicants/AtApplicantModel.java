@@ -1,7 +1,11 @@
 package ba.infostudio.hcm.atApplicants;
 
+import ba.infostudio.hcm.apUsers.ApUserModel;
 import ba.infostudio.hcm.atJobApplications.AtJobApplicationModel;
+import ba.infostudio.hcm.rgQualifications.RgQualificationsModel;
+import ba.infostudio.hcm.rgRegions.RgRegionsModel;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
@@ -28,15 +32,29 @@ public class AtApplicantModel {
     private String gender;
     private Date birthdate;
     private String marital_status;
-    private Long id_country;
-    private Long id_region;
-    private Long id_city;
+
     private String address;
-    private Long id_employee;
+    @OneToOne
+    @JoinColumn(name = "ID_COUNTRY")
+    private RgRegionsModel id_country;
+
+    @OneToOne
+    @JoinColumn(name = "ID_REGION")
+    private RgRegionsModel id_region;
+
+    @OneToOne
+    @JoinColumn(name = "ID_CITY")
+    private RgRegionsModel id_city;
+
+    @OneToOne
+    @JoinColumn(name = "ID_QUALIFICATION")
+    private RgQualificationsModel id_qualification;
+    private String employed;
     private String description;
     private String employment_position;
     private String industry;
-    private Long id_user;
+
+
     private String created_by;
     private Timestamp created_at;
     private String updated_by;
@@ -44,38 +62,19 @@ public class AtApplicantModel {
     private String phone_number;
     private String email;
 
+    private Long id_employee;
 
+    @OneToOne
+    @JoinColumn(name = "ID_USER")
+    private ApUserModel idUser;
+
+
+    @JsonIgnore
     @OneToMany(mappedBy = "id_applicant", fetch = FetchType.LAZY)
     private Collection<AtJobApplicationModel> jobApplications;
 
 
     public AtApplicantModel() {
-    }
-
-    public AtApplicantModel(String name, String surname, String middle_name, String maiden_name, String gender, Date birthdate, String marital_status, Long id_country, Long id_region, Long id_city, String address, Long id_employee, String description, String employment_position, String industry, Long id_user, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, String phone_number, String email, Collection<AtJobApplicationModel> jobApplications) {
-        this.name = name;
-        this.surname = surname;
-        this.middle_name = middle_name;
-        this.maiden_name = maiden_name;
-        this.gender = gender;
-        this.birthdate = birthdate;
-        this.marital_status = marital_status;
-        this.id_country = id_country;
-        this.id_region = id_region;
-        this.id_city = id_city;
-        this.address = address;
-        this.id_employee = id_employee;
-        this.description = description;
-        this.employment_position = employment_position;
-        this.industry = industry;
-        this.id_user = id_user;
-        this.created_by = created_by;
-        this.created_at = created_at;
-        this.updated_by = updated_by;
-        this.updated_at = updated_at;
-        this.phone_number = phone_number;
-        this.email = email;
-        this.jobApplications = jobApplications;
     }
 
     public Long getId() {
@@ -142,30 +141,6 @@ public class AtApplicantModel {
         this.marital_status = marital_status;
     }
 
-    public Long getId_country() {
-        return id_country;
-    }
-
-    public void setId_country(Long id_country) {
-        this.id_country = id_country;
-    }
-
-    public Long getId_region() {
-        return id_region;
-    }
-
-    public void setId_region(Long id_region) {
-        this.id_region = id_region;
-    }
-
-    public Long getId_city() {
-        return id_city;
-    }
-
-    public void setId_city(Long id_city) {
-        this.id_city = id_city;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -174,12 +149,44 @@ public class AtApplicantModel {
         this.address = address;
     }
 
-    public Long getId_employee() {
-        return id_employee;
+    public RgRegionsModel getId_country() {
+        return id_country;
     }
 
-    public void setId_employee(Long id_employee) {
-        this.id_employee = id_employee;
+    public void setId_country(RgRegionsModel id_country) {
+        this.id_country = id_country;
+    }
+
+    public RgRegionsModel getId_region() {
+        return id_region;
+    }
+
+    public void setId_region(RgRegionsModel id_region) {
+        this.id_region = id_region;
+    }
+
+    public RgRegionsModel getId_city() {
+        return id_city;
+    }
+
+    public void setId_city(RgRegionsModel id_city) {
+        this.id_city = id_city;
+    }
+
+    public RgQualificationsModel getId_qualification() {
+        return id_qualification;
+    }
+
+    public void setId_qualification(RgQualificationsModel id_qualification) {
+        this.id_qualification = id_qualification;
+    }
+
+    public String getEmployed() {
+        return employed;
+    }
+
+    public void setEmployed(String employed) {
+        this.employed = employed;
     }
 
     public String getDescription() {
@@ -204,14 +211,6 @@ public class AtApplicantModel {
 
     public void setIndustry(String industry) {
         this.industry = industry;
-    }
-
-    public Long getId_user() {
-        return id_user;
-    }
-
-    public void setId_user(Long id_user) {
-        this.id_user = id_user;
     }
 
     public String getCreated_by() {
@@ -246,14 +245,6 @@ public class AtApplicantModel {
         this.updated_at = updated_at;
     }
 
-    public Collection<AtJobApplicationModel> getJobApplications() {
-        return jobApplications;
-    }
-
-    public void setJobApplications(Collection<AtJobApplicationModel> jobApplications) {
-        this.jobApplications = jobApplications;
-    }
-
     public String getPhone_number() {
         return phone_number;
     }
@@ -268,5 +259,57 @@ public class AtApplicantModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Long getId_employee() {
+        return id_employee;
+    }
+
+    public void setId_employee(Long id_employee) {
+        this.id_employee = id_employee;
+    }
+
+    public ApUserModel getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(ApUserModel idUser) {
+        this.idUser = idUser;
+    }
+
+    public Collection<AtJobApplicationModel> getJobApplications() {
+        return jobApplications;
+    }
+
+    public void setJobApplications(Collection<AtJobApplicationModel> jobApplications) {
+        this.jobApplications = jobApplications;
+    }
+
+    public AtApplicantModel(String name, String surname, String middle_name, String maiden_name, String gender, Date birthdate, String marital_status, String address, RgRegionsModel id_country, RgRegionsModel id_region, RgRegionsModel id_city, RgQualificationsModel id_qualification, String employed, String description, String employment_position, String industry, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, String phone_number, String email, Long id_employee, ApUserModel idUser, Collection<AtJobApplicationModel> jobApplications) {
+        this.name = name;
+        this.surname = surname;
+        this.middle_name = middle_name;
+        this.maiden_name = maiden_name;
+        this.gender = gender;
+        this.birthdate = birthdate;
+        this.marital_status = marital_status;
+        this.address = address;
+        this.id_country = id_country;
+        this.id_region = id_region;
+        this.id_city = id_city;
+        this.id_qualification = id_qualification;
+        this.employed = employed;
+        this.description = description;
+        this.employment_position = employment_position;
+        this.industry = industry;
+        this.created_by = created_by;
+        this.created_at = created_at;
+        this.updated_by = updated_by;
+        this.updated_at = updated_at;
+        this.phone_number = phone_number;
+        this.email = email;
+        this.id_employee = id_employee;
+        this.idUser = idUser;
+        this.jobApplications = jobApplications;
     }
 }

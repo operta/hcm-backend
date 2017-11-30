@@ -31,9 +31,15 @@ public class AtApplicantService {
         applicant.setMaiden_name(applicantData.getMaiden_name());
         applicant.setGender(applicantData.getGender());
         applicant.setMarital_status(applicantData.getMarital_status());
-//        applicant.setId_city(applicantData.getId_city());
-//        applicant.setId_country(applicantData.getId_country());
+        applicant.setId_city(applicantData.getId_city());
+        applicant.setId_country(applicantData.getId_country());
         applicant.setId_region(applicantData.getId_region());
+        applicant.setAddress(applicantData.getAddress());
+        applicant.setId_qualification(applicantData.getId_qualification());
+        applicant.setEmployed(applicantData.getEmployed());
+        applicant.setEmployment_position(applicantData.getEmployment_position());
+        applicant.setIndustry(applicantData.getIndustry());
+        applicant.setDescription(applicantData.getDescription());
 
         return this.atApplicantRepository.save(applicant);
     }
