@@ -75,6 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers("/vacancies/**")
                 .antMatchers("/regions/**")
+                .antMatchers("/regionTypes/**")
                 .antMatchers("/workPlaces/**")
                 .antMatchers("/users/add")
                 .antMatchers("/userStatuses/**")
@@ -92,7 +93,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/applicantContacts/**")
                 .antMatchers("/documentLinks/**")
                 .antMatchers("/documentTypes/**")
-                .antMatchers("/contactTypes/**");
+                .antMatchers("/contactTypes/**")
+                .antMatchers("/skills/**")
+                .antMatchers("/skillGrades/**");
     }
 
     @Bean

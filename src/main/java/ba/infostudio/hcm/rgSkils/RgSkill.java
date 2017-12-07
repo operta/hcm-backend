@@ -1,6 +1,7 @@
 package ba.infostudio.hcm.rgSkils;
 
 import java.lang.reflect.Field;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,38 +22,14 @@ public class RgSkill {
 	private String name;
 	private String description;
 	private String field;
+	private String created_by;
+	private Timestamp created_at;
+	private String updated_by;
+	private Timestamp updated_at;
 	
 	public RgSkill() {
 	}
 
-	public RgSkill(Long id, String code, String name, String description, String field) {
-		super();
-		this.id = id;
-		this.code = code;
-		this.name = name;
-		this.description = description;
-		this.field = field;
-	}
-
-	@Override
-    public String toString() {
-        String classValues = null;
-        try {
-            classValues = getClass().getName() + " [";
-            Field[] fields = getClass().getDeclaredFields();
-            for (int i = 0; i < fields.length; i++) {
-                classValues = classValues + fields[i].getName() + "=";
-                classValues = classValues + fields[i].get(this) + ", ";
-            }
-            classValues = classValues.substring(0, classValues.length() - 2);
-            classValues = classValues + "]";
-        }
-        catch (Exception e) {
-            classValues = super.toString();
-        }
-        return classValues;
-    }
-  
 	public Long getId() {
 		return id;
 	}
@@ -91,5 +68,48 @@ public class RgSkill {
 
 	public void setField(String field) {
 		this.field = field;
+	}
+
+	public String getCreated_by() {
+		return created_by;
+	}
+
+	public void setCreated_by(String created_by) {
+		this.created_by = created_by;
+	}
+
+	public Timestamp getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(Timestamp created_at) {
+		this.created_at = created_at;
+	}
+
+	public String getUpdated_by() {
+		return updated_by;
+	}
+
+	public void setUpdated_by(String updated_by) {
+		this.updated_by = updated_by;
+	}
+
+	public Timestamp getUpdated_at() {
+		return updated_at;
+	}
+
+	public void setUpdated_at(Timestamp updated_at) {
+		this.updated_at = updated_at;
+	}
+
+	public RgSkill(String code, String name, String description, String field, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
+		this.code = code;
+		this.name = name;
+		this.description = description;
+		this.field = field;
+		this.created_by = created_by;
+		this.created_at = created_at;
+		this.updated_by = updated_by;
+		this.updated_at = updated_at;
 	}
 }

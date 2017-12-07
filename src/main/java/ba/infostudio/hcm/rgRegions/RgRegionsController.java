@@ -1,10 +1,7 @@
 package ba.infostudio.hcm.rgRegions;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -35,6 +32,28 @@ public class RgRegionsController {
     @RequestMapping("/regions/regions")
     public @ResponseBody Iterable<RgRegionsModel> getAllRRegions(){
         return this.rgRegionsRepository.findByIdType_name("Region");
+    }
+
+    @PostMapping(value = "/regions/add")
+    public RgRegionsModel addRegion(@RequestBody RgRegionsModel region) {
+        return this.rgRegionsRepository.save(region);
+    }
+
+    @PutMapping("/regions")
+    public RgRegionsModel updateRegion(@RequestBody RgRegionsModel body) {
+        RgRegionsModel region = rgRegionsRepository.findOne(body.getId());
+        region.setCode(body.getCode());
+        region.setName(body.getName());
+        region.setDescription(body.getDescription());
+        region.setId_parent(body.getId_parent());
+        region.setIdType(body.getIdType());
+        return this.rgRegionsRepository.save(region);
+    }
+
+    @DeleteMapping("/regions/remove/{id}")
+    public boolean deleteRegion(@PathVariable String id) {
+        this.rgRegionsRepository.delete(Long.valueOf(id));
+        return true;
     }
 
 }
