@@ -47,7 +47,7 @@ public class AtVacancyModel {
     private Timestamp updated_at;
 
 
-    @OneToMany(mappedBy = "id_vacancies")
+    @OneToMany(mappedBy = "vacancyid")
     private Collection<AtJobApplicationModel> jobApplications;
 
     public AtVacancyModel() {

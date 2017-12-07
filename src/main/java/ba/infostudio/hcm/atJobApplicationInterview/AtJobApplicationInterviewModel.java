@@ -9,9 +9,11 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "AT_JOB_APPLICATION_INTERVIEW")
+@Table(name = "AT_JOB_APPLICATIONS_INTERVIEWS")
 public class AtJobApplicationInterviewModel {
     @Id
+    @SequenceGenerator(name="OID", sequenceName="OID", allocationSize=1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="OID")
     private Long id;
     private Long grade;
     private String description;
@@ -23,18 +25,17 @@ public class AtJobApplicationInterviewModel {
     @ManyToOne
     @JoinColumn(name = "JOB_APPLICATION_ID")
     private AtJobApplicationModel job_application_id;
-
-    private Date interview_date;
-
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "LOCATION_ID")
     private RgRegionsModel location_id;
+
+
+    private Date interview_date;
 
     public AtJobApplicationInterviewModel() {
     }
 
-    public AtJobApplicationInterviewModel(Long id, Long grade, String description, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, AtJobApplicationModel job_application_id, Date interview_date, RgRegionsModel location_id) {
-        this.id = id;
+    public AtJobApplicationInterviewModel(Long grade, String description, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, AtJobApplicationModel job_application_id, RgRegionsModel location_id, Date interview_date) {
         this.grade = grade;
         this.description = description;
         this.created_by = created_by;
@@ -42,8 +43,8 @@ public class AtJobApplicationInterviewModel {
         this.updated_by = updated_by;
         this.updated_at = updated_at;
         this.job_application_id = job_application_id;
-        this.interview_date = interview_date;
         this.location_id = location_id;
+        this.interview_date = interview_date;
     }
 
     public Long getId() {

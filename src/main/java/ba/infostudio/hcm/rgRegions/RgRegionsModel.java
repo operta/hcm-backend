@@ -1,10 +1,9 @@
 package ba.infostudio.hcm.rgRegions;
 
-import ba.infostudio.hcm.atApplicants.AtApplicantModel;
-import ba.infostudio.hcm.ogWorkPlaceTypes.OgWorkPlaceTypes;
+import ba.infostudio.hcm.atJobApplicationInterview.AtJobApplicationInterviewModel;
+import ba.infostudio.hcm.atJobApplicationTest.AtJobApplicationTestModel;
 import ba.infostudio.hcm.rgRegionTypes.RgRegionTypesModel;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -41,10 +40,17 @@ public class RgRegionsModel implements Serializable {
     private String updated_by;
     private Timestamp updated_at;
 
+    @OneToMany(mappedBy = "location_id")
+    @JsonBackReference(value = "testsReference")
+    private Collection<AtJobApplicationTestModel> tests;
+
+    @OneToMany(mappedBy = "location_id")
+    @JsonBackReference(value = "interviewReference")
+    private Collection<AtJobApplicationInterviewModel> interviews;
 
     public RgRegionsModel() {}
 
-    public RgRegionsModel(String code, String name, String description, RgRegionTypesModel idType, RgRegionsModel id_parent, Collection<RgRegionsModel> children, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
+    public RgRegionsModel(String code, String name, String description, RgRegionTypesModel idType, RgRegionsModel id_parent, Collection<RgRegionsModel> children, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<AtJobApplicationTestModel> tests, Collection<AtJobApplicationInterviewModel> interviews) {
         this.code = code;
         this.name = name;
         this.description = description;
@@ -55,6 +61,8 @@ public class RgRegionsModel implements Serializable {
         this.created_at = created_at;
         this.updated_by = updated_by;
         this.updated_at = updated_at;
+        this.tests = tests;
+        this.interviews = interviews;
     }
 
     public Long getId() {
@@ -143,5 +151,21 @@ public class RgRegionsModel implements Serializable {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public Collection<AtJobApplicationTestModel> getTests() {
+        return tests;
+    }
+
+    public void setTests(Collection<AtJobApplicationTestModel> tests) {
+        this.tests = tests;
+    }
+
+    public Collection<AtJobApplicationInterviewModel> getInterviews() {
+        return interviews;
+    }
+
+    public void setInterviews(Collection<AtJobApplicationInterviewModel> interviews) {
+        this.interviews = interviews;
     }
 }

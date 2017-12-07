@@ -16,9 +16,11 @@ import java.util.Collection;
 
 /*@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property="@UUID")*/
-@JsonIdentityInfo(generator=JSOGGenerator.class)
+
 @Entity
 @Table(name = "AT_JOB_APPLICATIONS")
+@JsonIdentityInfo(generator=JSOGGenerator.class)
+
 public class AtJobApplicationModel implements Serializable {
     @Id
     @SequenceGenerator(name="OID", sequenceName="OID", allocationSize=1)
@@ -26,13 +28,13 @@ public class AtJobApplicationModel implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="ID_APPLICANT")
-    private AtApplicantModel id_applicant;
+    @JoinColumn(name="APPLICANTID")
+    private AtApplicantModel applicantid;
 
 
     @ManyToOne
-    @JoinColumn(name = "ID_VACANCIES")
-    private AtVacancyModel id_vacancies;
+    @JoinColumn(name = "VACANCYID")
+    private AtVacancyModel vacancyid;
     private Long id_status;
     private Long grade;
     private String review;
@@ -52,9 +54,9 @@ public class AtJobApplicationModel implements Serializable {
     public AtJobApplicationModel() {
     }
 
-    public AtJobApplicationModel(AtApplicantModel id_applicant, AtVacancyModel id_vacancies, Long id_status, Long grade, String review, Date date_applied, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Long interview_grade, Long test_grade, Collection<AtJobApplicationTestModel> test, Collection<AtJobApplicationInterviewModel> interview) {
-        this.id_applicant = id_applicant;
-        this.id_vacancies = id_vacancies;
+    public AtJobApplicationModel(AtApplicantModel applicantid, AtVacancyModel vacancyid, Long id_status, Long grade, String review, Date date_applied, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Long interview_grade, Long test_grade, Collection<AtJobApplicationTestModel> test, Collection<AtJobApplicationInterviewModel> interview) {
+        this.applicantid = applicantid;
+        this.vacancyid = vacancyid;
         this.id_status = id_status;
         this.grade = grade;
         this.review = review;
@@ -77,20 +79,20 @@ public class AtJobApplicationModel implements Serializable {
         this.id = id;
     }
 
-    public AtApplicantModel getId_applicant() {
-        return id_applicant;
+    public AtApplicantModel getApplicantid() {
+        return applicantid;
     }
 
-    public void setId_applicant(AtApplicantModel id_applicant) {
-        this.id_applicant = id_applicant;
+    public void setApplicantid(AtApplicantModel applicantid) {
+        this.applicantid = applicantid;
     }
 
-    public AtVacancyModel getId_vacancies() {
-        return id_vacancies;
+    public AtVacancyModel getVacancyid() {
+        return vacancyid;
     }
 
-    public void setId_vacancies(AtVacancyModel id_vacancies) {
-        this.id_vacancies = id_vacancies;
+    public void setVacancyid(AtVacancyModel vacancyid) {
+        this.vacancyid = vacancyid;
     }
 
     public Long getId_status() {
@@ -157,20 +159,12 @@ public class AtJobApplicationModel implements Serializable {
         this.updated_at = updated_at;
     }
 
-    public Collection<AtJobApplicationInterviewModel> getInterview() {
-        return interview;
+    public Long getInterview_grade() {
+        return interview_grade;
     }
 
-    public void setInterview(Collection<AtJobApplicationInterviewModel> interview) {
-        this.interview = interview;
-    }
-
-    public Collection<AtJobApplicationTestModel> getTest() {
-        return test;
-    }
-
-    public void setTest(Collection<AtJobApplicationTestModel> test) {
-        this.test = test;
+    public void setInterview_grade(Long interview_grade) {
+        this.interview_grade = interview_grade;
     }
 
     public Long getTest_grade() {
@@ -181,11 +175,19 @@ public class AtJobApplicationModel implements Serializable {
         this.test_grade = test_grade;
     }
 
-    public Long getInterview_grade() {
-        return interview_grade;
+    public Collection<AtJobApplicationTestModel> getTest() {
+        return test;
     }
 
-    public void setInterview_grade(Long interview_grade) {
-        this.interview_grade = interview_grade;
+    public void setTest(Collection<AtJobApplicationTestModel> test) {
+        this.test = test;
+    }
+
+    public Collection<AtJobApplicationInterviewModel> getInterview() {
+        return interview;
+    }
+
+    public void setInterview(Collection<AtJobApplicationInterviewModel> interview) {
+        this.interview = interview;
     }
 }
