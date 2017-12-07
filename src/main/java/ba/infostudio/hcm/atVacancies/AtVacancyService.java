@@ -43,4 +43,8 @@ public class AtVacancyService {
     public AtVacancyModel newVacancy(AtVacancyModel vacancy) {
         return this.atVacancyRepository.save(vacancy);
     }
+
+    public void deleteVacancy(Long id) {
+        this.atVacancyRepository.delete(id);
+    }
 }

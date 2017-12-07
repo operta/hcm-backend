@@ -3,17 +3,17 @@ package ba.infostudio.hcm.atJobApplicationTest;
 import ba.infostudio.hcm.atJobApplications.AtJobApplicationModel;
 import ba.infostudio.hcm.rgRegions.RgRegionsModel;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "AT_JOB_APPLICATION_TEST")
+@Table(name = "AT_JOB_APPLICATIONS_TESTS")
 public class AtJobApplicationTestModel {
     @Id
+    @SequenceGenerator(name="OID", sequenceName="OID", allocationSize=1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="OID")
     private Long id;
     private Long score;
     private String created_by;
@@ -25,25 +25,31 @@ public class AtJobApplicationTestModel {
     @JoinColumn(name = "JOB_APPLICATION_ID")
     private AtJobApplicationModel job_application_id;
 
-    private Date test_date;
-
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "LOCATION_ID")
     private RgRegionsModel location_id;
+
+    private Date test_date;
+    private String short_description;
+    private String review;
+
+
+
 
     public AtJobApplicationTestModel() {
     }
 
-    public AtJobApplicationTestModel(Long id, Long score, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, AtJobApplicationModel job_application_id, Date test_date, RgRegionsModel location_id) {
-        this.id = id;
+    public AtJobApplicationTestModel(Long score, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, AtJobApplicationModel job_application_id, RgRegionsModel location_id, Date test_date, String short_description, String review) {
         this.score = score;
         this.created_by = created_by;
         this.created_at = created_at;
         this.updated_by = updated_by;
         this.updated_at = updated_at;
         this.job_application_id = job_application_id;
-        this.test_date = test_date;
         this.location_id = location_id;
+        this.test_date = test_date;
+        this.short_description = short_description;
+        this.review = review;
     }
 
     public Long getId() {
@@ -102,19 +108,35 @@ public class AtJobApplicationTestModel {
         this.job_application_id = job_application_id;
     }
 
-    public RgRegionsModel getLocation_id() {
-        return location_id;
-    }
-
-    public void setLocation_id(RgRegionsModel location_id) {
-        this.location_id = location_id;
-    }
-
     public Date getTest_date() {
         return test_date;
     }
 
     public void setTest_date(Date test_date) {
         this.test_date = test_date;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+
+    public String getShort_description() {
+        return short_description;
+    }
+
+    public void setShort_description(String short_description) {
+        this.short_description = short_description;
+    }
+
+    public RgRegionsModel getLocation_id() {
+        return location_id;
+    }
+
+    public void setLocation_id(RgRegionsModel location_id) {
+        this.location_id = location_id;
     }
 }

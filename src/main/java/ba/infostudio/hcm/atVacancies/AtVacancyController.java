@@ -35,4 +35,10 @@ public class AtVacancyController {
 
         return true;
     }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public String deleteVacancy(@PathVariable String id) {
+        this.atVacancyService.deleteVacancy(Long.valueOf(id));
+        return id;
+    }
 }

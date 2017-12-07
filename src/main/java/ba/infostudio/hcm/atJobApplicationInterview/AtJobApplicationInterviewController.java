@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 public class AtJobApplicationInterviewController {
     @Autowired
-    private AtJobApplicationInterviewRepository atJobApplicationInterviewRepository;
+    private AtJobApplicationInterviewService atJobApplicationInterviewService;
 
     @GetMapping("")
     public @ResponseBody Iterable<AtJobApplicationInterviewModel> getAll(){
-        return this.atJobApplicationInterviewRepository.findAll();
+        return this.atJobApplicationInterviewService.getAll();
+    }
+
+    @PostMapping(value = "/add")
+    public AtJobApplicationInterviewModel addInterview(@RequestBody AtJobApplicationInterviewModel atJobApplicationInterviewModel) {
+        return this.atJobApplicationInterviewService.addInterview(atJobApplicationInterviewModel);
     }
 }

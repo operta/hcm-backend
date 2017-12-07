@@ -69,8 +69,7 @@ public class AtApplicantModel {
     private ApUserModel idUser;
 
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "id_applicant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "applicantid")
     private Collection<AtJobApplicationModel> jobApplications;
 
 
