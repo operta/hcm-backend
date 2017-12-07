@@ -83,7 +83,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/schools/**")
                 .antMatchers("/applicantSchools/**")
                 .antMatchers("/accomplishmentTypes/**")
-                .antMatchers("/applicantAccomplishments/**");
+                .antMatchers("/applicantAccomplishments/**")
+                .antMatchers("/applicantExperiences/**")
+                .antMatchers("/applicantDocuments/**")
+                .antMatchers("/applicantContacts/**")
+                .antMatchers("/documentLinks/**")
+                .antMatchers("/documentTypes/**")
+                .antMatchers("/contactTypes/**");
     }
 
     @Bean

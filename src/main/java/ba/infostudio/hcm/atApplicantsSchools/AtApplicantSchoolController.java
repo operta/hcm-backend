@@ -18,7 +18,7 @@ public class AtApplicantSchoolController {
     @GetMapping("/applicantSchools/{id}")
     @ResponseBody
     public Iterable<AtApplicantSchoolModel> getApplicantSchools(@PathVariable String id) {
-        return this.atApplicantSchoolRepository.findByIdApplicant_id(Long.valueOf(id));
+        return this.atApplicantSchoolRepository.findByIdApplicant_idOrderByDateFromDesc(Long.valueOf(id));
     }
 
     @PostMapping(value = "/applicantSchools/add")
@@ -33,12 +33,18 @@ public class AtApplicantSchoolController {
         school.setId_qualification(body.getId_qualification());
         school.setSchool(body.getSchool());
         school.setId_school(body.getId_school());
-        school.setDate_from(body.getDate_from());
+        school.setDateFrom(body.getDateFrom());
         school.setDate_to(body.getDate_to());
         school.setMajor(body.getMajor());
         school.setGrade(body.getGrade());
         school.setDescription(body.getDescription());
         school.setLink(body.getLink());
         return this.atApplicantSchoolRepository.save(school);
+    }
+
+    @DeleteMapping("/applicantSchools/remove/{id}")
+    public boolean deleteApplicantSchool(@PathVariable String id) {
+        this.atApplicantSchoolRepository.delete(Long.valueOf(id));
+        return true;
     }
 }

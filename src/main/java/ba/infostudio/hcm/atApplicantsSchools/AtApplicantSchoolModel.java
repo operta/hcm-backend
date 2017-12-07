@@ -25,7 +25,8 @@ public class AtApplicantSchoolModel {
     private AtApplicantModel idApplicant;
 
     private String school;
-    private Date date_from;
+    @Column(name = "DATE_FROM")
+    private Date dateFrom;
     private Date date_to;
     private String major;
     private String degree;
@@ -76,12 +77,12 @@ public class AtApplicantSchoolModel {
         this.school = school;
     }
 
-    public Date getDate_from() {
-        return date_from;
+    public Date getDateFrom() {
+        return dateFrom;
     }
 
-    public void setDate_from(Date date_from) {
-        this.date_from = date_from;
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
     }
 
     public Date getDate_to() {
@@ -172,11 +173,11 @@ public class AtApplicantSchoolModel {
         this.updated_at = updated_at;
     }
 
-    public AtApplicantSchoolModel(RgSchoolsModel id_school, AtApplicantModel idApplicant, String school, Date date_from, Date date_to, String major, String degree, RgQualificationsModel id_qualification, int grade, String description, String link, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
+    public AtApplicantSchoolModel(RgSchoolsModel id_school, AtApplicantModel idApplicant, String school, Date dateFrom, Date date_to, String major, String degree, RgQualificationsModel id_qualification, int grade, String description, String link, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
         this.id_school = id_school;
         this.idApplicant = idApplicant;
         this.school = school;
-        this.date_from = date_from;
+        this.dateFrom = dateFrom;
         this.date_to = date_to;
         this.major = major;
         this.degree = degree;
