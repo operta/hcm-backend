@@ -2,7 +2,7 @@ package ba.infostudio.hcm.atJobApplications;
 
 import ba.infostudio.hcm.atApplicants.AtApplicantModel;
 import ba.infostudio.hcm.atJobApplicationInterview.AtJobApplicationInterviewModel;
-import ba.infostudio.hcm.atJobApplicationStatusModel.AtJobApplicationStatusModel;
+import ba.infostudio.hcm.atJobApplicationStatus.AtJobApplicationStatusModel;
 import ba.infostudio.hcm.atJobApplicationTest.AtJobApplicationTestModel;
 import ba.infostudio.hcm.atVacancies.AtVacancyModel;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;

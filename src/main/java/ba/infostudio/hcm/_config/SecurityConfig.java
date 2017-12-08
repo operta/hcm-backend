@@ -96,7 +96,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/documentTypes/**")
                 .antMatchers("/contactTypes/**")
                 .antMatchers("/skills/**")
-                .antMatchers("/skillGrades/**");
+                .antMatchers("/skillGrades/**")
+                .antMatchers("/jobApplicationStatuses/**");
     }
 
     @Bean

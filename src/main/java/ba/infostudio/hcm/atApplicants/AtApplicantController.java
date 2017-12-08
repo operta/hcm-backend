@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 public class AtApplicantController {
     @Autowired
     private AtApplicantService atApplicantService;
+    @Autowired
+    private AtApplicantRepository atApplicantRepository;
 
     @GetMapping("")
     public @ResponseBody Iterable<AtApplicantModel> getAllApplicants(){
@@ -23,6 +25,11 @@ public class AtApplicantController {
     @GetMapping("/{id}")
     public AtApplicantModel getApplicant(@PathVariable String id, HttpServletResponse response) {
         return this.atApplicantService.getApplicant(id);
+    }
+
+    @GetMapping("/applicant/{id}")
+    public AtApplicantModel getApplicantByApplicantId(@PathVariable String id, HttpServletResponse response) {
+        return this.atApplicantRepository.findOne(Long.valueOf(id));
     }
 
     @PostMapping(value = "/add")

@@ -1,4 +1,4 @@
-package ba.infostudio.hcm.atJobApplicationStatusModel;
+package ba.infostudio.hcm.atJobApplicationStatus;
 
 import ba.infostudio.hcm.atJobApplications.AtJobApplicationModel;
 
