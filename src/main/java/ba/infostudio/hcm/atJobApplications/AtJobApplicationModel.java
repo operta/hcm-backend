@@ -2,6 +2,7 @@ package ba.infostudio.hcm.atJobApplications;
 
 import ba.infostudio.hcm.atApplicants.AtApplicantModel;
 import ba.infostudio.hcm.atJobApplicationInterview.AtJobApplicationInterviewModel;
+import ba.infostudio.hcm.atJobApplicationStatusModel.AtJobApplicationStatusModel;
 import ba.infostudio.hcm.atJobApplicationTest.AtJobApplicationTestModel;
 import ba.infostudio.hcm.atVacancies.AtVacancyModel;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -35,7 +36,9 @@ public class AtJobApplicationModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "VACANCYID")
     private AtVacancyModel vacancyid;
-    private Long id_status;
+    @ManyToOne
+    @JoinColumn(name = "ID_STATUS")
+    private AtJobApplicationStatusModel id_status;
     private Long grade;
     private String review;
     private Date date_applied;
@@ -54,7 +57,7 @@ public class AtJobApplicationModel implements Serializable {
     public AtJobApplicationModel() {
     }
 
-    public AtJobApplicationModel(AtApplicantModel applicantid, AtVacancyModel vacancyid, Long id_status, Long grade, String review, Date date_applied, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Long interview_grade, Long test_grade, Collection<AtJobApplicationTestModel> test, Collection<AtJobApplicationInterviewModel> interview) {
+    public AtJobApplicationModel(AtApplicantModel applicantid, AtVacancyModel vacancyid, AtJobApplicationStatusModel id_status, Long grade, String review, Date date_applied, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Long interview_grade, Long test_grade, Collection<AtJobApplicationTestModel> test, Collection<AtJobApplicationInterviewModel> interview) {
         this.applicantid = applicantid;
         this.vacancyid = vacancyid;
         this.id_status = id_status;
@@ -95,11 +98,11 @@ public class AtJobApplicationModel implements Serializable {
         this.vacancyid = vacancyid;
     }
 
-    public Long getId_status() {
+    public AtJobApplicationStatusModel getId_status() {
         return id_status;
     }
 
-    public void setId_status(Long id_status) {
+    public void setId_status(AtJobApplicationStatusModel id_status) {
         this.id_status = id_status;
     }
 

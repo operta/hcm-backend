@@ -1,16 +1,13 @@
 package ba.infostudio.hcm.atVacancies;
 
 import ba.infostudio.hcm.atJobApplications.AtJobApplicationModel;
+import ba.infostudio.hcm.atVacancyStatus.AtVacancyStatusModel;
 import ba.infostudio.hcm.ogWorkPlaces.OgWorkPlacesModel;
 import ba.infostudio.hcm.rgRegions.RgRegionsModel;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
@@ -47,13 +44,17 @@ public class AtVacancyModel {
     private Timestamp updated_at;
 
 
-    @OneToMany(mappedBy = "vacancyid")
+    @OneToMany(mappedBy = "vacancyid", cascade = CascadeType.ALL)
     private Collection<AtJobApplicationModel> jobApplications;
+
+    @ManyToOne
+    @JoinColumn(name = "STATUS")
+    private AtVacancyStatusModel status;
 
     public AtVacancyModel() {
     }
 
-    public AtVacancyModel(String code, String name, String description, RgRegionsModel id_location, Date date_from, Date date_to, OgWorkPlacesModel id_work_place, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<AtJobApplicationModel> jobApplications) {
+    public AtVacancyModel(String code, String name, String description, RgRegionsModel id_location, Date date_from, Date date_to, OgWorkPlacesModel id_work_place, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<AtJobApplicationModel> jobApplications, AtVacancyStatusModel status) {
         this.code = code;
         this.name = name;
         this.description = description;
@@ -66,6 +67,7 @@ public class AtVacancyModel {
         this.updated_by = updated_by;
         this.updated_at = updated_at;
         this.jobApplications = jobApplications;
+        this.status = status;
     }
 
     public Long getId() {
@@ -188,5 +190,13 @@ public class AtVacancyModel {
 
     public void setJobApplications(Collection<AtJobApplicationModel> jobApplications) {
         this.jobApplications = jobApplications;
+    }
+
+    public AtVacancyStatusModel getStatus() {
+        return status;
+    }
+
+    public void setStatus(AtVacancyStatusModel status) {
+        this.status = status;
     }
 }

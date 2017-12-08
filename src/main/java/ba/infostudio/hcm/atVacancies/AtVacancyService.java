@@ -14,6 +14,10 @@ public class AtVacancyService {
         return this.atVacancyRepository.findAll();
     }
 
+    public Iterable<AtVacancyModel> getActiveVacancies() {
+        return this.atVacancyRepository.findByStatus_Id(Long.valueOf(1));
+    }
+
     public AtVacancyModel getVacancy(Long id){
         return this.atVacancyRepository.findOne(id);
     }

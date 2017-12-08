@@ -18,10 +18,17 @@ public class AtVacancyController {
         return this.atVacancyService.getAllVacancies();
     }
 
+
+    @GetMapping("/active")
+    public @ResponseBody Iterable<AtVacancyModel> getActiveVacancies() {
+        return this.atVacancyService.getActiveVacancies();
+    }
+
     @GetMapping("/{id}")
     public @ResponseBody AtVacancyModel getVacancy(@PathVariable String id) {
         return this.atVacancyService.getVacancy(Long.valueOf(id));
     }
+
 
 
     @PostMapping(value = "/add")

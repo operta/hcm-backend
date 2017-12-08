@@ -15,4 +15,10 @@ public class AtJobApplicationController {
         return this.atJobApplicationRepository.findAll();
     }
 
+
+    @GetMapping("/byApplicant/{id}")
+    private @ResponseBody Iterable<AtJobApplicationModel> getJobApplicationsByApplicant(@PathVariable Long id) {
+        return this.atJobApplicationRepository.findByApplicantid_id(id);
+    }
+
 }
