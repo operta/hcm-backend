@@ -12,8 +12,8 @@ public class AtApplicantService {
         return this.atApplicantRepository.findAll();
     }
 
-    public AtApplicantModel getApplicant(String id) {
-        return this.atApplicantRepository.findByIdUser_id(Long.valueOf(id));
+    public AtApplicantModel getApplicant(Long id) {
+        return this.atApplicantRepository.findByIdUser_id(id);
     }
 
 

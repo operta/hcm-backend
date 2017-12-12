@@ -51,10 +51,17 @@ public class AtVacancyModel {
     @JoinColumn(name = "STATUS")
     private AtVacancyStatusModel status;
 
+    private String job_role;
+    private String job_working_time;
+    private String skills_requirement;
+    private String language_requirement;
+    private String education_requirement;
+    private String experience_requirement;
+
     public AtVacancyModel() {
     }
 
-    public AtVacancyModel(String code, String name, String description, RgRegionsModel id_location, Date date_from, Date date_to, OgWorkPlacesModel id_work_place, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<AtJobApplicationModel> jobApplications, AtVacancyStatusModel status) {
+    public AtVacancyModel(String code, String name, String description, RgRegionsModel id_location, Date date_from, Date date_to, OgWorkPlacesModel id_work_place, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<AtJobApplicationModel> jobApplications, AtVacancyStatusModel status, String job_role, String job_working_time, String skills_requirement, String language_requirement, String education_requirement, String experience_requirement) {
         this.code = code;
         this.name = name;
         this.description = description;
@@ -68,6 +75,12 @@ public class AtVacancyModel {
         this.updated_at = updated_at;
         this.jobApplications = jobApplications;
         this.status = status;
+        this.job_role = job_role;
+        this.job_working_time = job_working_time;
+        this.skills_requirement = skills_requirement;
+        this.language_requirement = language_requirement;
+        this.education_requirement = education_requirement;
+        this.experience_requirement = experience_requirement;
     }
 
     public Long getId() {
@@ -166,24 +179,6 @@ public class AtVacancyModel {
         this.updated_at = updated_at;
     }
 
-    @Override
-    public String toString() {
-        return "AtVacancyModel{" +
-                "id=" + id +
-                ", code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", id_location=" + id_location +
-                ", date_from=" + date_from +
-                ", date_to=" + date_to +
-                ", id_work_place=" + id_work_place +
-                ", created_by='" + created_by + '\'' +
-                ", created_at=" + created_at +
-                ", updated_by='" + updated_by + '\'' +
-                ", updated_at=" + updated_at +
-                '}';
-    }
-
     public Collection<AtJobApplicationModel> getJobApplications() {
         return jobApplications;
     }
@@ -198,5 +193,53 @@ public class AtVacancyModel {
 
     public void setStatus(AtVacancyStatusModel status) {
         this.status = status;
+    }
+
+    public String getJob_role() {
+        return job_role;
+    }
+
+    public void setJob_role(String job_role) {
+        this.job_role = job_role;
+    }
+
+    public String getJob_working_time() {
+        return job_working_time;
+    }
+
+    public void setJob_working_time(String job_working_time) {
+        this.job_working_time = job_working_time;
+    }
+
+    public String getSkills_requirement() {
+        return skills_requirement;
+    }
+
+    public void setSkills_requirement(String skills_requirement) {
+        this.skills_requirement = skills_requirement;
+    }
+
+    public String getLanguage_requirement() {
+        return language_requirement;
+    }
+
+    public void setLanguage_requirement(String language_requirement) {
+        this.language_requirement = language_requirement;
+    }
+
+    public String getEducation_requirement() {
+        return education_requirement;
+    }
+
+    public void setEducation_requirement(String education_requirement) {
+        this.education_requirement = education_requirement;
+    }
+
+    public String getExperience_requirement() {
+        return experience_requirement;
+    }
+
+    public void setExperience_requirement(String experience_requirement) {
+        this.experience_requirement = experience_requirement;
     }
 }

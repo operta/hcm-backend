@@ -24,7 +24,7 @@ public class AtApplicantController {
 
     @GetMapping("/{id}")
     public AtApplicantModel getApplicant(@PathVariable String id, HttpServletResponse response) {
-        return this.atApplicantService.getApplicant(id);
+        return this.atApplicantService.getApplicant(Long.valueOf(id));
     }
 
     @GetMapping("/applicant/{id}")
