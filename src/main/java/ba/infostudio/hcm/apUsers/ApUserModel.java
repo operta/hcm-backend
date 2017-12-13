@@ -17,6 +17,7 @@ public class ApUserModel implements Serializable {
 
     private String name;
     private String username;
+    private String email;
     private String password;
     private String role;
 
@@ -31,18 +32,6 @@ public class ApUserModel implements Serializable {
 
 
     public ApUserModel() {
-    }
-
-    public ApUserModel(String name, String username, String password, String role, ApUserStatusModel id_status, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.role = role;
-        this.id_status = id_status;
-        this.created_by = created_by;
-        this.created_at = created_at;
-        this.updated_by = updated_by;
-        this.updated_at = updated_at;
     }
 
     public Long getId() {
@@ -67,6 +56,14 @@ public class ApUserModel implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -125,20 +122,17 @@ public class ApUserModel implements Serializable {
         this.updated_at = updated_at;
     }
 
-    @Override
-    public String toString() {
-        return "ApUserModel{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                ", id_status=" + id_status +
-                ", created_by='" + created_by + '\'' +
-                ", created_at=" + created_at +
-                ", updated_by='" + updated_by + '\'' +
-                ", updated_at=" + updated_at +
-                '}';
+    public ApUserModel(String name, String username, String email, String password, String role, ApUserStatusModel id_status, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.id_status = id_status;
+        this.created_by = created_by;
+        this.created_at = created_at;
+        this.updated_by = updated_by;
+        this.updated_at = updated_at;
     }
 }
 

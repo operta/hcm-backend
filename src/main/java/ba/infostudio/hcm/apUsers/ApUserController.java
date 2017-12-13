@@ -30,8 +30,14 @@ public class ApUserController {
     }
 
     @PostMapping(value = "/add")
-    public ApUserModel addUser(@RequestBody ApUserModel apUserModel) {
-        return this.apUserService.addUser(apUserModel);
+    public boolean addUser(@RequestBody ApUserModel apUserModel) {
+        if(this.apUserRepository.findByUsername(apUserModel.getUsername()) == null)
+        {
+            this.apUserService.addUser(apUserModel);
+            return true;
+        }
+        else
+            return false;
     }
 
 }

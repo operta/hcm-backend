@@ -1,20 +1,14 @@
 package ba.infostudio.hcm.rgRegionTypes;
 
-import ba.infostudio.hcm.atJobApplications.AtJobApplicationModel;
-import ba.infostudio.hcm.ogWorkPlaces.OgWorkPlacesModel;
 import ba.infostudio.hcm.rgRegions.RgRegionsModel;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
 
 @Entity
 @Table(name = "RG_REGION_TYPES")
-
 public class RgRegionTypesModel implements Serializable {
     @Id
     @SequenceGenerator(name="OID", sequenceName="OID", allocationSize=1)
