@@ -5,12 +5,9 @@ import ba.infostudio.hcm.atJobApplications.AtJobApplicationModel;
 import ba.infostudio.hcm.rgQualifications.RgQualificationsModel;
 import ba.infostudio.hcm.rgRegions.RgRegionsModel;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
@@ -71,6 +68,8 @@ public class AtApplicantModel {
 
     @OneToMany(mappedBy = "applicantid")
     private Collection<AtJobApplicationModel> jobApplications;
+
+    private String image_link;
 
 
     public AtApplicantModel() {
@@ -284,7 +283,7 @@ public class AtApplicantModel {
         this.jobApplications = jobApplications;
     }
 
-    public AtApplicantModel(String name, String surname, String middle_name, String maiden_name, String gender, Date birthdate, String marital_status, String address, RgRegionsModel id_country, RgRegionsModel id_region, RgRegionsModel id_city, RgQualificationsModel id_qualification, String employed, String description, String employment_position, String industry, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, String phone_number, String email, Long id_employee, ApUserModel idUser, Collection<AtJobApplicationModel> jobApplications) {
+    public AtApplicantModel(String name, String surname, String middle_name, String maiden_name, String gender, Date birthdate, String marital_status, String address, RgRegionsModel id_country, RgRegionsModel id_region, RgRegionsModel id_city, RgQualificationsModel id_qualification, String employed, String description, String employment_position, String industry, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, String phone_number, String email, Long id_employee, ApUserModel idUser, Collection<AtJobApplicationModel> jobApplications, String image_link) {
         this.name = name;
         this.surname = surname;
         this.middle_name = middle_name;
@@ -310,5 +309,14 @@ public class AtApplicantModel {
         this.id_employee = id_employee;
         this.idUser = idUser;
         this.jobApplications = jobApplications;
+        this.image_link = image_link;
+    }
+
+    public String getImage_link() {
+        return image_link;
+    }
+
+    public void setImage_link(String image_link) {
+        this.image_link = image_link;
     }
 }
