@@ -24,7 +24,7 @@ public class ApUserController {
     }
 
     @RequestMapping("/{username}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+//    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public ApUserModel getUser(@PathVariable String username) {
         return this.apUserRepository.findByUsername(username);
     }

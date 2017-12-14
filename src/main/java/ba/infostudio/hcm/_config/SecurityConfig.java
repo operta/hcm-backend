@@ -78,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/regions/**")
                 .antMatchers("/regionTypes/**")
                 .antMatchers("/workPlaces/**")
-                .antMatchers("/users/add")
+                .antMatchers("/users/**")
                 .antMatchers("/userStatuses/**")
                 .antMatchers("/applicants/**")
                 .antMatchers("/qualifications/**")
