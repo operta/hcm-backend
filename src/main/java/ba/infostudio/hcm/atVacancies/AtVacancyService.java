@@ -38,6 +38,7 @@ public class AtVacancyService {
         vacancy.setDate_to(vac.getDate_to());
         vacancy.setId_location(vac.getId_location());
         vacancy.setId_work_place(vac.getId_work_place());
+        vacancy.setStatus(vac.getStatus());
 
         atVacancyRepository.save(vacancy);
 

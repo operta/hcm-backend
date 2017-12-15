@@ -1,6 +1,7 @@
 package ba.infostudio.hcm.atJobApplicationStatus;
 
 import ba.infostudio.hcm.atJobApplications.AtJobApplicationModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -22,6 +23,7 @@ public class AtJobApplicationStatusModel {
     private Date updated_at;
 
     @OneToMany(mappedBy = "id_status")
+    @JsonIgnore
     private Collection<AtJobApplicationModel> jobApplications;
 
     public AtJobApplicationStatusModel() {
