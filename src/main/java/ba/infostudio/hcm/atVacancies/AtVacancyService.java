@@ -11,7 +11,7 @@ public class AtVacancyService {
     private AtVacancyRepository atVacancyRepository;
 
     public Iterable<AtVacancyModel> getAllVacancies () {
-        return this.atVacancyRepository.findAll();
+        return this.atVacancyRepository.findAllByOrderByIdDesc();
     }
 
     public Iterable<AtVacancyModel> getActiveVacancies() {

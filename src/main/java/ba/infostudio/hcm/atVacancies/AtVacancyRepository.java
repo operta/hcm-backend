@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface AtVacancyRepository extends JpaRepository<AtVacancyModel, Long> {
     Iterable<AtVacancyModel> findByStatus_Id(Long id);
+    Iterable<AtVacancyModel> findAllByOrderByIdDesc();
 }
