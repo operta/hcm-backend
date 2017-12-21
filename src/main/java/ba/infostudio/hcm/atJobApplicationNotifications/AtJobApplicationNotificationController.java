@@ -12,7 +12,7 @@ public class AtJobApplicationNotificationController {
 
     @RequestMapping("/jobApplicationNotifications")
     public Iterable<AtJobApplicationNotificationModel> getAllJobApplicationNotifications(){
-        return this.atJobApplicationNotificationRepository.findAll();
+        return this.atJobApplicationNotificationRepository.findAllByOrderByDateSentDesc();
     }
 
     @PostMapping(value = "/jobApplicationNotifications/add")
@@ -26,7 +26,7 @@ public class AtJobApplicationNotificationController {
         q.setIdJobApplication(body.getIdJobApplication());
         q.setId_notification(body.getId_notification());
         q.setIs_active(body.getIs_active());
-        q.setDate_sent(body.getDate_sent());
+        q.setDateSent(body.getDateSent());
         return this.atJobApplicationNotificationRepository.save(q);
     }
 

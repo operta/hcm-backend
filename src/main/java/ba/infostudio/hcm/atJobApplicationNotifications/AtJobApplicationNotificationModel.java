@@ -20,7 +20,7 @@ public class AtJobApplicationNotificationModel {
     @OneToOne
     @JoinColumn(name = "ID_NOTIFICATION")
     private AtNotificationTemplateModel id_notification;
-    private Timestamp date_sent;
+    private Timestamp dateSent;
     private String is_active;
     private String created_by;
     private Timestamp created_at;
@@ -28,17 +28,6 @@ public class AtJobApplicationNotificationModel {
     private Timestamp updated_at;
 
     public AtJobApplicationNotificationModel() {}
-
-    public AtJobApplicationNotificationModel(AtJobApplicationModel idJobApplication, AtNotificationTemplateModel id_notification, Timestamp date_sent, String is_active, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
-        this.idJobApplication = idJobApplication;
-        this.id_notification = id_notification;
-        this.date_sent = date_sent;
-        this.is_active = is_active;
-        this.created_by = created_by;
-        this.created_at = created_at;
-        this.updated_by = updated_by;
-        this.updated_at = updated_at;
-    }
 
     public Long getId() {
         return id;
@@ -64,12 +53,12 @@ public class AtJobApplicationNotificationModel {
         this.id_notification = id_notification;
     }
 
-    public Timestamp getDate_sent() {
-        return date_sent;
+    public Timestamp getDateSent() {
+        return dateSent;
     }
 
-    public void setDate_sent(Timestamp date_sent) {
-        this.date_sent = date_sent;
+    public void setDateSent(Timestamp dateSent) {
+        this.dateSent = dateSent;
     }
 
     public String getIs_active() {
@@ -109,6 +98,17 @@ public class AtJobApplicationNotificationModel {
     }
 
     public void setUpdated_at(Timestamp updated_at) {
+        this.updated_at = updated_at;
+    }
+
+    public AtJobApplicationNotificationModel(AtJobApplicationModel idJobApplication, AtNotificationTemplateModel id_notification, Timestamp dateSent, String is_active, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
+        this.idJobApplication = idJobApplication;
+        this.id_notification = id_notification;
+        this.dateSent = dateSent;
+        this.is_active = is_active;
+        this.created_by = created_by;
+        this.created_at = created_at;
+        this.updated_by = updated_by;
         this.updated_at = updated_at;
     }
 }
