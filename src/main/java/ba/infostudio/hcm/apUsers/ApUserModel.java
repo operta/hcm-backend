@@ -15,7 +15,6 @@ public class ApUserModel implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="OID")
     private Long id;
 
-    private String name;
     private String username;
     private String email;
     private String password;
@@ -40,14 +39,6 @@ public class ApUserModel implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getUsername() {
@@ -122,8 +113,7 @@ public class ApUserModel implements Serializable {
         this.updated_at = updated_at;
     }
 
-    public ApUserModel(String name, String username, String email, String password, String role, ApUserStatusModel id_status, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
-        this.name = name;
+    public ApUserModel(String username, String email, String password, String role, ApUserStatusModel id_status, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
         this.username = username;
         this.email = email;
         this.password = password;
