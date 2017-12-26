@@ -35,6 +35,24 @@ public class ApUserService implements UserDetailsService {
         return this.apUserRepository.save(apUserModel);
     }
 
+    public ApUserModel updatePassword(String id, String password) {
+        ApUserModel user = this.apUserRepository.findOne(Long.valueOf(id));
+        ShaPasswordEncoder encoder = new ShaPasswordEncoder(encodingStrength);
+        user.setPassword(encoder.encodePassword(password, null));
+        return this.apUserRepository.save(user);
+    }
+
+    public boolean comparePassword(String id, String password) {
+        ApUserModel user = this.apUserRepository.findOne(Long.valueOf(id));
+        ShaPasswordEncoder encoder = new ShaPasswordEncoder(encodingStrength);
+        String hashedPassword = encoder.encodePassword(password, null);
+        if(hashedPassword.equals(user.getPassword()) ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         ApUserModel user = apUserRepository.findByUsername(s);

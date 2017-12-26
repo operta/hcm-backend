@@ -19,6 +19,7 @@ public class ApUserModel implements Serializable {
     private String email;
     private String password;
     private String role;
+    private String image_path;
 
     @OneToOne
     @JoinColumn(name = "ID_STATUS")
@@ -73,6 +74,14 @@ public class ApUserModel implements Serializable {
         this.role = role;
     }
 
+    public String getImage_path() {
+        return image_path;
+    }
+
+    public void setImage_path(String image_path) {
+        this.image_path = image_path;
+    }
+
     public ApUserStatusModel getId_status() {
         return id_status;
     }
@@ -113,11 +122,12 @@ public class ApUserModel implements Serializable {
         this.updated_at = updated_at;
     }
 
-    public ApUserModel(String username, String email, String password, String role, ApUserStatusModel id_status, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
+    public ApUserModel(String username, String email, String password, String role, String image_path, ApUserStatusModel id_status, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.image_path = image_path;
         this.id_status = id_status;
         this.created_by = created_by;
         this.created_at = created_at;
