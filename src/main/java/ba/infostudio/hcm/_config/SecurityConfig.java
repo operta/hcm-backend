@@ -15,7 +15,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.jwt.crypto.sign.RsaVerifier;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -74,34 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/vacancies/**")
-                .antMatchers("/regions/**")
-                .antMatchers("/regionTypes/**")
-                .antMatchers("/workPlaces/**")
-                .antMatchers("/users/**")
-                .antMatchers("/userStatuses/**")
-                .antMatchers("/applicants/**")
-                .antMatchers("/qualifications/**")
-                .antMatchers("/schools/**")
-                .antMatchers("/applicantSchools/**")
-                .antMatchers("/accomplishmentTypes/**")
-                .antMatchers("/applicantAccomplishments/**")
-                .antMatchers("/interview/**")
-                .antMatchers("/test/**")
-                .antMatchers("/jobApplications/**")
-                .antMatchers("/applicantAccomplishments/**")
-                .antMatchers("/applicantExperiences/**")
-                .antMatchers("/applicantDocuments/**")
-                .antMatchers("/applicantContacts/**")
-                .antMatchers("/documentLinks/**")
-                .antMatchers("/documentTypes/**")
-                .antMatchers("/contactTypes/**")
-                .antMatchers("/skills/**")
-                .antMatchers("/skillGrades/**")
-                .antMatchers("/jobApplicationStatuses/**")
-                .antMatchers("/jobApplicationHistory/**")
-                .antMatchers("/notificationTemplates/**")
-                .antMatchers("/jobApplicationNotifications/**");
+                .antMatchers("/users/add");
     }
 
     @Bean
