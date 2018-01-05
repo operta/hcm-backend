@@ -1,7 +1,11 @@
 package ba.infostudio.hcm.atJobApplicationNotifications;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.Timestamp;
 
 @RestController
 public class AtJobApplicationNotificationController {
@@ -9,6 +13,8 @@ public class AtJobApplicationNotificationController {
     @Autowired
     private AtJobApplicationNotificationRepository atJobApplicationNotificationRepository;
 
+    @Autowired
+    public JavaMailSender emailSender;
 
     @RequestMapping("/jobApplicationNotifications")
     public Iterable<AtJobApplicationNotificationModel> getAllJobApplicationNotifications(){
@@ -27,6 +33,8 @@ public class AtJobApplicationNotificationController {
         q.setId_notification(body.getId_notification());
         q.setIs_active(body.getIs_active());
         q.setDateSent(body.getDateSent());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        q.setUpdated_at(timestamp);
         return this.atJobApplicationNotificationRepository.save(q);
     }
 

@@ -2,6 +2,8 @@ package ba.infostudio.hcm.apUsers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,13 +12,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class ApUserService implements UserDetailsService {
     @Autowired
     private ApUserRepository apUserRepository;
+
+    @Autowired
+    public JavaMailSender emailSender;
 
     @Value("${security.encoding-strength}")
     private Integer encodingStrength;
@@ -49,6 +56,38 @@ public class ApUserService implements UserDetailsService {
         if(hashedPassword.equals(user.getPassword()) ) {
             return true;
         } else {
+            return false;
+        }
+    }
+
+    public boolean resetPasswordFor(String userEmail) {
+        ApUserModel user = this.apUserRepository.findByEmail(userEmail);
+        if(user != null){
+            ShaPasswordEncoder encoder = new ShaPasswordEncoder(encodingStrength);
+            Random random = new Random();
+            int unHashedPassword = 100000 + random.nextInt(900000);
+            System.out.println();
+            System.out.println(String.valueOf(unHashedPassword));
+            String hashedPassword = encoder.encodePassword(String.valueOf(unHashedPassword), null);
+            user.setPassword(hashedPassword);
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            user.setUpdated_at(timestamp);
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(userEmail);
+            message.setSubject("Reset password");
+            message.setText(
+                "Your password has been successfully reset. \n" +
+                "Your new password is: " + unHashedPassword +
+                "\nYour username is: " + user.getUsername() +
+                "\nYou can change your password in Account Settings.\n" +
+                "\nBest regards, \n" +
+                "Infostudio Team"
+            );
+            emailSender.send(message);
+            apUserRepository.save(user);
+            return true;
+        }
+        else {
             return false;
         }
     }

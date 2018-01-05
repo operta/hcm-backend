@@ -1,9 +1,6 @@
 package ba.infostudio.hcm.apUsers;
 
-import ba.infostudio.hcm.atApplicantAccomplishments.AtApplicantAccomplishmentModel;
 import ba.infostudio.hcm.atApplicants.AtApplicantService;
-import ba.infostudio.hcm.atVacancies.AtVacancyModel;
-import ba.infostudio.hcm.atVacancies.AtVacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -34,11 +31,8 @@ public class ApUserController {
         ApUserModel user = apUserRepository.findOne(body.getId());
         user.setEmail(body.getEmail());
         user.setUsername(body.getUsername());
-
-        if(user.getImage_path() == null || body.getImage_path() != user.getImage_path()){
-            atApplicantService.updateApplicantImage(body.getImage_path(), user.getId());
-        }
         user.setImage_path(body.getImage_path());
+        atApplicantService.updateApplicantImage(body.getImage_path(), user.getId());
         return this.apUserRepository.save(user);
     }
 
@@ -60,14 +54,27 @@ public class ApUserController {
 
 
     @PostMapping(value = "/add")
-    public boolean addUser(@RequestBody ApUserModel apUserModel) {
+    public String addUser(@RequestBody ApUserModel apUserModel) {
         if(this.apUserRepository.findByUsername(apUserModel.getUsername()) == null)
         {
-            this.apUserService.addUser(apUserModel);
-            return true;
+            if(this.apUserRepository.findByEmail(apUserModel.getEmail()) == null){
+                this.apUserService.addUser(apUserModel);
+                return "OK";
+            } else {
+                return "Email";
+            }
         }
         else
-            return false;
+            return "Username";
+    }
+
+    @GetMapping(value = "/resetPassword/{email:.+}")
+    public String resetPasswordFor(@PathVariable String email) {
+        if(this.apUserService.resetPasswordFor(email))
+            return "Email successfully sent";
+        else
+            return "User with this email does not exist";
+
     }
 
 }
