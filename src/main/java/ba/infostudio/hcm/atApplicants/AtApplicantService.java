@@ -44,4 +44,18 @@ public class AtApplicantService {
         return this.atApplicantRepository.save(applicant);
     }
 
+    public void updateApplicantImage (String link, Long userId) {
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println(link);
+        System.out.println(userId);
+
+        AtApplicantModel applicant = atApplicantRepository.findByIdUser_id(userId);
+        if(applicant != null){
+            applicant.setImage_link(link);
+            atApplicantRepository.save(applicant);
+        }
+    }
+
 }

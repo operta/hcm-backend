@@ -74,34 +74,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/vacancies/**")
-                .antMatchers("/regions/**")
-                .antMatchers("/regionTypes/**")
-                .antMatchers("/workPlaces/**")
-                .antMatchers("/users/**")
-                .antMatchers("/userStatuses/**")
-                .antMatchers("/applicants/**")
-                .antMatchers("/qualifications/**")
-                .antMatchers("/schools/**")
-                .antMatchers("/applicantSchools/**")
-                .antMatchers("/accomplishmentTypes/**")
-                .antMatchers("/applicantAccomplishments/**")
-                .antMatchers("/interview/**")
-                .antMatchers("/test/**")
-                .antMatchers("/jobApplications/**")
-                .antMatchers("/applicantAccomplishments/**")
-                .antMatchers("/applicantExperiences/**")
-                .antMatchers("/applicantDocuments/**")
-                .antMatchers("/applicantContacts/**")
-                .antMatchers("/documentLinks/**")
-                .antMatchers("/documentTypes/**")
-                .antMatchers("/contactTypes/**")
-                .antMatchers("/skills/**")
-                .antMatchers("/skillGrades/**")
-                .antMatchers("/jobApplicationStatuses/**")
-                .antMatchers("/jobApplicationHistory/**")
-                .antMatchers("/notificationTemplates/**")
-                .antMatchers("/jobApplicationNotifications/**");
+                .antMatchers("/users/add")
+                .antMatchers("/users/resetPassword/**");
     }
 
     @Bean
