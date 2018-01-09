@@ -1,9 +1,14 @@
 package ba.infostudio.hcm.atVacancies;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
+
 
 public interface AtVacancyRepository extends JpaRepository<AtVacancyModel, Long> {
-    Iterable<AtVacancyModel> findByStatus_Id(Long id);
-    Iterable<AtVacancyModel> findAllByOrderByIdDesc();
+    Page<AtVacancyModel> findByStatus_Id(Long id, Pageable pageable);
+    Page<AtVacancyModel> findAll(Pageable pageable);
 }

@@ -1,32 +1,35 @@
 package ba.infostudio.hcm.atVacancies;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class AtVacancyService {
     @Autowired
     private AtVacancyRepository atVacancyRepository;
 
-    public Iterable<AtVacancyModel> getAllVacancies () {
-        return this.atVacancyRepository.findAllByOrderByIdDesc();
+    public Page<AtVacancyModel> getAllVacancies (Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        Pageable pageable = new PageRequest(page, size, sort);
+        return this.atVacancyRepository.findAll(pageable);
     }
 
-    public Iterable<AtVacancyModel> getActiveVacancies() {
-        return this.atVacancyRepository.findByStatus_Id(Long.valueOf(1));
+    public Page<AtVacancyModel> getActiveVacancies(Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        Pageable pageable = new PageRequest(page, size, sort);
+        return this.atVacancyRepository.findByStatus_Id(Long.valueOf(1),pageable);
     }
 
     public AtVacancyModel getVacancy(Long id){
         return this.atVacancyRepository.findOne(id);
     }
-
-    public AtVacancyModel addVacancy(AtVacancyModel atVacancyModel){
-        return this.atVacancyRepository.save(atVacancyModel);
-    }
-
-
 
     public AtVacancyModel updateAtVacancy (AtVacancyModel vac){
         AtVacancyModel vacancy = atVacancyRepository.findOne(vac.getId());
