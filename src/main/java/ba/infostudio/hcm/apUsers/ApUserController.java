@@ -36,6 +36,7 @@ public class ApUserController {
         return this.apUserRepository.save(user);
     }
 
+
     @RequestMapping("/{username}")
     //@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public ApUserModel getUser(@PathVariable String username) {
