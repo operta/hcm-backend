@@ -44,14 +44,11 @@ public class OgWorkPlacesModel implements Serializable {
     private String updated_by;
     private Timestamp updated_at;
 
-    @JsonBackReference(value = "id_work_place")
-    @OneToMany(mappedBy = "id_work_place")
-    private Collection<AtVacancyModel> vacancies;
 
     public OgWorkPlacesModel() {
     }
 
-    public OgWorkPlacesModel(String code, String name, String description, OgWorkPlacesModel id_parent, Collection<OgWorkPlacesModel> children, OgOrganizationsModel id_organization, OgWorkPlaceTypes id_work_place_type, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<AtVacancyModel> vacancies) {
+    public OgWorkPlacesModel(String code, String name, String description, OgWorkPlacesModel id_parent, Collection<OgWorkPlacesModel> children, OgOrganizationsModel id_organization, OgWorkPlaceTypes id_work_place_type, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
         this.code = code;
         this.name = name;
         this.description = description;
@@ -63,7 +60,6 @@ public class OgWorkPlacesModel implements Serializable {
         this.created_at = created_at;
         this.updated_by = updated_by;
         this.updated_at = updated_at;
-        this.vacancies = vacancies;
     }
 
     public Long getId() {
@@ -162,11 +158,4 @@ public class OgWorkPlacesModel implements Serializable {
         this.updated_at = updated_at;
     }
 
-    public Collection<AtVacancyModel> getVacancies() {
-        return vacancies;
-    }
-
-    public void setVacancies(Collection<AtVacancyModel> vacancies) {
-        this.vacancies = vacancies;
-    }
 }
