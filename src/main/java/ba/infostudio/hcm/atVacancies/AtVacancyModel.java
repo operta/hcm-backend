@@ -35,9 +35,9 @@ public class AtVacancyModel {
     private Date date_from;
     private Date date_to;
 
-    @ManyToOne
+/*    @ManyToOne
     @JoinColumn(name = "ID_WORK_PLACE")
-    private OgWorkPlacesModel id_work_place;
+    private OgWorkPlacesModel id_work_place;*/
     private String created_by;
     private Timestamp created_at;
     private String updated_by;
@@ -61,14 +61,13 @@ public class AtVacancyModel {
     public AtVacancyModel() {
     }
 
-    public AtVacancyModel(String code, String name, String description, RgRegionsModel id_location, Date date_from, Date date_to, OgWorkPlacesModel id_work_place, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<AtJobApplicationModel> jobApplications, AtVacancyStatusModel status, String job_role, String job_working_time, String skills_requirement, String language_requirement, String education_requirement, String experience_requirement) {
+    public AtVacancyModel(String code, String name, String description, RgRegionsModel id_location, Date date_from, Date date_to, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<AtJobApplicationModel> jobApplications, AtVacancyStatusModel status, String job_role, String job_working_time, String skills_requirement, String language_requirement, String education_requirement, String experience_requirement) {
         this.code = code;
         this.name = name;
         this.description = description;
         this.id_location = id_location;
         this.date_from = date_from;
         this.date_to = date_to;
-        this.id_work_place = id_work_place;
         this.created_by = created_by;
         this.created_at = created_at;
         this.updated_by = updated_by;
@@ -137,14 +136,6 @@ public class AtVacancyModel {
 
     public void setDate_to(Date date_to) {
         this.date_to = date_to;
-    }
-
-    public OgWorkPlacesModel getId_work_place() {
-        return id_work_place;
-    }
-
-    public void setId_work_place(OgWorkPlacesModel id_work_place) {
-        this.id_work_place = id_work_place;
     }
 
     public String getCreated_by() {

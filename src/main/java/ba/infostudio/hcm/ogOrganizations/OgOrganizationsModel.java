@@ -38,12 +38,12 @@ public class OgOrganizationsModel {
 
     @JsonBackReference("id_organization")
     @OneToMany(mappedBy = "id_organization")
-    private Collection<OgWorkPlacesModel> id_work_places;
+    private Collection<OgWorkPlacesModel> id_organization_type;
 
     public OgOrganizationsModel() {
     }
 
-    public OgOrganizationsModel(String code, String name, String description, LeLegalEntitiesModel id_legal_entity, OgOrganizationsModel id_parent, Collection<OgOrganizationsModel> children, String created_by, String created_at, String updated_by, String updated_at, Collection<OgWorkPlacesModel> id_work_places) {
+    public OgOrganizationsModel(String code, String name, String description, LeLegalEntitiesModel id_legal_entity, OgOrganizationsModel id_parent, Collection<OgOrganizationsModel> children, String created_by, String created_at, String updated_by, String updated_at, Collection<OgWorkPlacesModel> id_organization_type) {
         this.code = code;
         this.name = name;
         this.description = description;
@@ -54,7 +54,7 @@ public class OgOrganizationsModel {
         this.created_at = created_at;
         this.updated_by = updated_by;
         this.updated_at = updated_at;
-        this.id_work_places = id_work_places;
+        this.id_organization_type = id_organization_type;
     }
 
     public Long getId() {
@@ -146,10 +146,10 @@ public class OgOrganizationsModel {
     }
 
     public Collection<OgWorkPlacesModel> getId_work_places() {
-        return id_work_places;
+        return id_organization_type;
     }
 
     public void setId_work_places(Collection<OgWorkPlacesModel> id_work_places) {
-        this.id_work_places = id_work_places;
+        this.id_organization_type = id_work_places;
     }
 }
