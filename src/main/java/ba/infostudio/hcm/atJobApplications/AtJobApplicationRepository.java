@@ -5,5 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface AtJobApplicationRepository extends JpaRepository<AtJobApplicationModel, Long> {
     Iterable<AtJobApplicationModel> findByApplicantid_id(Long id);
+    Iterable<AtJobApplicationModel> findByVacancyid_Id(Long id);
 
 }

@@ -14,17 +14,14 @@ import java.util.List;
 public class AtVacancyController {
     @Autowired
     private AtVacancyService atVacancyService;
+    @Autowired
+    private AtVacancyMService atVacancyMService;
 
 /*    @GetMapping("")
     public @ResponseBody
     Page<AtVacancyModel> getAllVacancies(){
         return this.atVacancyService.getAllVacancies();
     }*/
-    @GetMapping("/{id}")
-    public @ResponseBody AtVacancyModel getVacancy(@PathVariable String id) {
-        return this.atVacancyService.getVacancy(Long.valueOf(id));
-    }
-
 
     @GetMapping("/{page}/{size}")
     public @ResponseBody
@@ -32,10 +29,33 @@ public class AtVacancyController {
         return this.atVacancyService.getAllVacancies(Integer.valueOf(page), Integer.valueOf(size));
     }
 
+    //all vacancies mobile
+    @GetMapping("/M/{page}/{size}")
+    public @ResponseBody
+    Page<AtVacancyMModel> getAllMVacancies(@PathVariable String page, @PathVariable String size){
+        return this.atVacancyMService.getAllMVacancies(Integer.valueOf(page), Integer.valueOf(size));
+    }
+
+    @GetMapping("/{id}")
+    public @ResponseBody AtVacancyModel getVacancy(@PathVariable String id) {
+        return this.atVacancyService.getVacancy(Long.valueOf(id));
+    }
+
+    //vacancy by vacancy id mobile
+    @GetMapping("/M/{id}")
+    public @ResponseBody AtVacancyMModel getVacancyM(@PathVariable String id) {
+        return this.atVacancyMService.getVacancy(Long.valueOf(id));
+    }
 
     @GetMapping("/active/{page}/{size}")
     public @ResponseBody Page<AtVacancyModel> getActiveVacancies(@PathVariable String page, @PathVariable String size) {
         return this.atVacancyService.getActiveVacancies(Integer.valueOf(page), Integer.valueOf(size));
+    }
+
+    //all active vacancy mobile
+    @GetMapping("/active/M/{page}/{size}")
+    public @ResponseBody Page<AtVacancyMModel> getActiveVacanciesM(@PathVariable String page, @PathVariable String size) {
+        return this.atVacancyMService.getActiveMVacancies(Integer.valueOf(page), Integer.valueOf(size));
     }
 
 
