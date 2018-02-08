@@ -20,6 +20,11 @@ public class AtJobApplicationController {
         return this.atJobApplicationRepository.findOne(Long.valueOf(id));
     }
 
+    @GetMapping("/byVacancy/{id}")
+    private @ResponseBody Iterable<AtJobApplicationModel> getJobApplicationsByVacancy(@PathVariable Long id) {
+        return this.atJobApplicationRepository.findByVacancyid_Id(id);
+    }
+
 
     @GetMapping("/byApplicant/{id}")
     private @ResponseBody Iterable<AtJobApplicationModel> getJobApplicationsByApplicant(@PathVariable Long id) {

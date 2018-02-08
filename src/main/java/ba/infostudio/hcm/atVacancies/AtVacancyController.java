@@ -14,12 +14,21 @@ import java.util.List;
 public class AtVacancyController {
     @Autowired
     private AtVacancyService atVacancyService;
+    @Autowired
+    private AtVacancyMService atVacancyMService;
 
 /*    @GetMapping("")
     public @ResponseBody
     Page<AtVacancyModel> getAllVacancies(){
         return this.atVacancyService.getAllVacancies();
     }*/
+
+    @GetMapping("/M/{page}/{size}")
+    public @ResponseBody
+    Page<AtVacancyMModel> getAllMVacancies(@PathVariable String page, @PathVariable String size){
+        return this.atVacancyMService.getAllMVacancies(Integer.valueOf(page), Integer.valueOf(size));
+    }
+
     @GetMapping("/{id}")
     public @ResponseBody AtVacancyModel getVacancy(@PathVariable String id) {
         return this.atVacancyService.getVacancy(Long.valueOf(id));
