@@ -23,6 +23,13 @@ public class AtVacancyController {
         return this.atVacancyService.getAllVacancies();
     }*/
 
+    @GetMapping("/{page}/{size}")
+    public @ResponseBody
+    Page<AtVacancyModel> getAllVacancies(@PathVariable String page, @PathVariable String size){
+        return this.atVacancyService.getAllVacancies(Integer.valueOf(page), Integer.valueOf(size));
+    }
+
+    //all vacancies mobile
     @GetMapping("/M/{page}/{size}")
     public @ResponseBody
     Page<AtVacancyMModel> getAllMVacancies(@PathVariable String page, @PathVariable String size){
@@ -34,17 +41,21 @@ public class AtVacancyController {
         return this.atVacancyService.getVacancy(Long.valueOf(id));
     }
 
-
-    @GetMapping("/{page}/{size}")
-    public @ResponseBody
-    Page<AtVacancyModel> getAllVacancies(@PathVariable String page, @PathVariable String size){
-        return this.atVacancyService.getAllVacancies(Integer.valueOf(page), Integer.valueOf(size));
+    //vacancy by vacancy id mobile
+    @GetMapping("/M/{id}")
+    public @ResponseBody AtVacancyMModel getVacancyM(@PathVariable String id) {
+        return this.atVacancyMService.getVacancy(Long.valueOf(id));
     }
-
 
     @GetMapping("/active/{page}/{size}")
     public @ResponseBody Page<AtVacancyModel> getActiveVacancies(@PathVariable String page, @PathVariable String size) {
         return this.atVacancyService.getActiveVacancies(Integer.valueOf(page), Integer.valueOf(size));
+    }
+
+    //all active vacancy mobile
+    @GetMapping("/active/M/{page}/{size}")
+    public @ResponseBody Page<AtVacancyMModel> getActiveVacanciesM(@PathVariable String page, @PathVariable String size) {
+        return this.atVacancyMService.getActiveMVacancies(Integer.valueOf(page), Integer.valueOf(size));
     }
 
 
