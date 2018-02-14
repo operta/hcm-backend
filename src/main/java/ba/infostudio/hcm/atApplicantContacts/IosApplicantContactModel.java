@@ -1,7 +1,10 @@
-package ba.infostudio.hcm.atApplicantExperiences;
+package ba.infostudio.hcm.atApplicantContacts;
 
-import ba.infostudio.hcm.atAccomplishmentTypes.AtAccomplishmentTypesModel;
+
 import ba.infostudio.hcm.atApplicants.AtApplicantModel;
+import ba.infostudio.hcm.rgContactTypes.RgContactTypeModel;
+import ba.infostudio.hcm.rgSkillGrades.RgSkillGrade;
+import ba.infostudio.hcm.rgSkils.RgSkill;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -9,29 +12,30 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name="AT_APPLICANT_EXPERIENCES")
-public class AtApplicantExperienceModel {
+@Table(name = "AT_APPLICANTS_CONTACTS")
+public class IosApplicantContactModel {
     @Id
     @SequenceGenerator(name="OID", sequenceName="OID", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="OID")
     private Long id;
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "ID_APPLICANT")
     private AtApplicantModel idApplicant;
 
-    private String company;
-    private String position;
-    private String location;
-    private String ongoing;
-    private Date date_from;
-    private Date date_to;
+    @OneToOne
+    @JoinColumn(name = "ID_CONTACT_TYPE")
+    private RgContactTypeModel id_contact_type;
+
+    private String contact;
+    private String description;
     private String created_by;
     private Timestamp created_at;
     private String updated_by;
     private Timestamp updated_at;
 
-    public AtApplicantExperienceModel(){}
+    public IosApplicantContactModel(){}
 
     public Long getId() {
         return id;
@@ -49,52 +53,28 @@ public class AtApplicantExperienceModel {
         this.idApplicant = idApplicant;
     }
 
-    public String getCompany() {
-        return company;
+    public RgContactTypeModel getId_contact_type() {
+        return id_contact_type;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public void setId_contact_type(RgContactTypeModel id_contact_type) {
+        this.id_contact_type = id_contact_type;
     }
 
-    public String getPosition() {
-        return position;
+    public String getContact() {
+        return contact;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
-    public String getLocation() {
-        return location;
+    public String getDescription() {
+        return description;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getOngoing() {
-        return ongoing;
-    }
-
-    public void setOngoing(String ongoing) {
-        this.ongoing = ongoing;
-    }
-
-    public Date getDate_from() {
-        return date_from;
-    }
-
-    public void setDate_from(Date date_from) {
-        this.date_from = date_from;
-    }
-
-    public Date getDate_to() {
-        return date_to;
-    }
-
-    public void setDate_to(Date date_to) {
-        this.date_to = date_to;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCreated_by() {
@@ -129,18 +109,16 @@ public class AtApplicantExperienceModel {
         this.updated_at = updated_at;
     }
 
-    public AtApplicantExperienceModel(AtApplicantModel idApplicant, String company, String position, String location, String ongoing, Date date_from, Date date_to, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
+    public IosApplicantContactModel(AtApplicantModel idApplicant, RgContactTypeModel id_contact_type, String contact, String description, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
         this.idApplicant = idApplicant;
-        this.company = company;
-        this.position = position;
-        this.location = location;
-        this.ongoing = ongoing;
-        this.date_from = date_from;
-        this.date_to = date_to;
+        this.id_contact_type = id_contact_type;
+        this.contact = contact;
+        this.description = description;
         this.created_by = created_by;
         this.created_at = created_at;
         this.updated_by = updated_by;
         this.updated_at = updated_at;
     }
 }
+
 

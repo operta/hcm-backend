@@ -1,5 +1,6 @@
 package ba.infostudio.hcm.atApplicantAccomplishments;
 
+import ba.infostudio.hcm.atApplicantContacts.IosApplicantContactRepository;
 import ba.infostudio.hcm.atApplicantsSchools.AtApplicantSchoolModel;
 import ba.infostudio.hcm.atApplicantsSchools.AtApplicantSchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,9 @@ public class AtApplicantAccomplishmentController {
     @Autowired
     private AtApplicantAccomplishmentRepository atApplicantAccomplishmentRepository;
 
+    @Autowired
+    private IosApplicantAccomplishmentRepository iosApplicantAccomplishmentRepository;
+
     @RequestMapping("/applicantAccomplishments")
     public Iterable<AtApplicantAccomplishmentModel> getAllApplicantAccomplishments() {
         return this.atApplicantAccomplishmentRepository.findAll();
@@ -19,6 +23,12 @@ public class AtApplicantAccomplishmentController {
     @ResponseBody
     public Iterable<AtApplicantAccomplishmentModel> getApplicantAccomplishment(@PathVariable String id) {
         return this.atApplicantAccomplishmentRepository.findByIdApplicant_id(Long.valueOf(id));
+    }
+
+    @GetMapping("/applicantAccomplishments/nojsog/{id}")
+    @ResponseBody
+    public Iterable<IosApplicantAccomplishmentModel> getApplicantAccomplishmentWithoutJsog(@PathVariable String id) {
+        return this.iosApplicantAccomplishmentRepository.findByIdApplicant_Id(Long.valueOf(id));
     }
 
     @PostMapping(value = "/applicantAccomplishments/add")

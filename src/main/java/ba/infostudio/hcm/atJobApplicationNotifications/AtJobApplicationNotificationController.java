@@ -1,5 +1,6 @@
 package ba.infostudio.hcm.atJobApplicationNotifications;
 
+import ba.infostudio.hcm.atApplicantsSchools.IosApplicantSchoolModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,11 +15,19 @@ public class AtJobApplicationNotificationController {
     private AtJobApplicationNotificationRepository atJobApplicationNotificationRepository;
 
     @Autowired
+    private IosJobApplicationNotificationRepository iosJobApplicationNotificationRepository;
+
+    @Autowired
     public JavaMailSender emailSender;
 
     @RequestMapping("/jobApplicationNotifications")
     public Iterable<AtJobApplicationNotificationModel> getAllJobApplicationNotifications(){
         return this.atJobApplicationNotificationRepository.findAllByOrderByDateSentDesc();
+    }
+
+    @GetMapping("/jobApplicationNotifications/nojsog/{id}")
+    public Iterable<IosJobApplicationNotificationModel> getAllJobApplicationNotificationsWithoutJsog(@PathVariable String id){
+        return this.iosJobApplicationNotificationRepository.findByIdJobApplication_Applicantid_IdOrderByDateSentDesc(Long.valueOf(id));
     }
 
     @PostMapping(value = "/jobApplicationNotifications/add")
