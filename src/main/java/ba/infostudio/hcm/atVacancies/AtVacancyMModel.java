@@ -2,24 +2,20 @@ package ba.infostudio.hcm.atVacancies;
 
 import ba.infostudio.hcm.atJobApplications.AtJobApplicationModel;
 import ba.infostudio.hcm.atVacancyStatus.AtVacancyStatusModel;
-import ba.infostudio.hcm.ogWorkPlaces.OgWorkPlacesModel;
 import ba.infostudio.hcm.rgRegions.RgRegionsModel;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 
-/*@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-/*
-@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property="@UUID")
-*/
-@JsonIdentityInfo(generator=JSOGGenerator.class)
 @Entity
 @Table(name = "AT_VACANCIES")
-public class AtVacancyModel {
+public class AtVacancyMModel {
     @Id
     @SequenceGenerator(name="OID", sequenceName="OID", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="OID")
@@ -32,13 +28,15 @@ public class AtVacancyModel {
     @JoinColumn(name = "ID_LOCATION")
     private RgRegionsModel idLocation;
 
-    private Date date_from;
+    @Column(name = "date_from")
+    private Date dateFrom;
 
-    private Date date_to;
+    @Column(name = "date_to")
+    private Date dateTo;
 
-/*    @ManyToOne
-    @JoinColumn(name = "ID_WORK_PLACE")
-    private OgWorkPlacesModel id_work_place;*/
+    /*    @ManyToOne
+        @JoinColumn(name = "ID_WORK_PLACE")
+        private OgWorkPlacesModel id_work_place;*/
     private String created_by;
     private Timestamp created_at;
     private String updated_by;
@@ -46,6 +44,7 @@ public class AtVacancyModel {
 
 
     @OneToMany(mappedBy = "vacancyid", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Collection<AtJobApplicationModel> jobApplications;
 
     @ManyToOne
@@ -59,16 +58,16 @@ public class AtVacancyModel {
     private String education_requirement;
     private String experience_requirement;
 
-    public AtVacancyModel() {
+    public AtVacancyMModel() {
     }
 
-    public AtVacancyModel(String code, String name, String description, RgRegionsModel idLocation, Date date_from, Date date_to, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<AtJobApplicationModel> jobApplications, AtVacancyStatusModel status, String job_role, String job_working_time, String skills_requirement, String language_requirement, String education_requirement, String experience_requirement) {
+    public AtVacancyMModel(String code, String name, String description, RgRegionsModel idLocation, Date dateFrom, Date dateTo, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<AtJobApplicationModel> jobApplications, AtVacancyStatusModel status, String job_role, String job_working_time, String skills_requirement, String language_requirement, String education_requirement, String experience_requirement) {
         this.code = code;
         this.name = name;
         this.description = description;
         this.idLocation = idLocation;
-        this.date_from = date_from;
-        this.date_to = date_to;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
         this.created_by = created_by;
         this.created_at = created_at;
         this.updated_by = updated_by;
@@ -124,19 +123,19 @@ public class AtVacancyModel {
     }
 
     public Date getDate_from() {
-        return date_from;
+        return dateFrom;
     }
 
-    public void setDate_from(Date date_from) {
-        this.date_from = date_from;
+    public void setDate_from(Date dateFrom) {
+        this.dateFrom = dateFrom;
     }
 
     public Date getDate_to() {
-        return date_to;
+        return dateTo;
     }
 
-    public void setDate_to(Date date_to) {
-        this.date_to = date_to;
+    public void setDate_to(Date dateTo) {
+        this.dateTo = dateTo;
     }
 
     public String getCreated_by() {

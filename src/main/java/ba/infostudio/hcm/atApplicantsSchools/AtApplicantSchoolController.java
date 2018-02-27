@@ -10,6 +10,9 @@ public class AtApplicantSchoolController {
     @Autowired
     private AtApplicantSchoolRepository atApplicantSchoolRepository;
 
+    @Autowired
+    private IosApplicantSchoolRepository iosApplicantSchoolRepository;
+
     @RequestMapping("/applicantSchools")
     public Iterable<AtApplicantSchoolModel> getAllApplicantSchools() {
         return this.atApplicantSchoolRepository.findAll();
@@ -19,6 +22,12 @@ public class AtApplicantSchoolController {
     @ResponseBody
     public Iterable<AtApplicantSchoolModel> getApplicantSchools(@PathVariable String id) {
         return this.atApplicantSchoolRepository.findByIdApplicant_idOrderByDateFromDesc(Long.valueOf(id));
+    }
+
+    @GetMapping("/applicantSchools/nojsog/{id}")
+    @ResponseBody
+    public Iterable<IosApplicantSchoolModel> getApplicantSchoolsWithoutJsog(@PathVariable String id) {
+        return this.iosApplicantSchoolRepository.findByIdApplicant_idOrderByDateFromDesc(Long.valueOf(id));
     }
 
     @PostMapping(value = "/applicantSchools/add")

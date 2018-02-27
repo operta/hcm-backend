@@ -10,6 +10,9 @@ public class AtApplicantContactController {
     @Autowired
     private AtApplicantContactRepository atApplicantContactRepository;
 
+    @Autowired
+    private IosApplicantContactRepository iosApplicantContactRepository;
+
     @RequestMapping("/applicantContacts")
     public Iterable<AtApplicantContactModel> getAllApplicantContacts() {
         return this.atApplicantContactRepository.findAll();
@@ -19,6 +22,12 @@ public class AtApplicantContactController {
     @ResponseBody
     public Iterable<AtApplicantContactModel> getApplicantContacts(@PathVariable String id) {
         return this.atApplicantContactRepository.findByIdApplicant_id(Long.valueOf(id));
+    }
+
+    @GetMapping("/applicantContacts/nojsog/{id}")
+    @ResponseBody
+    public Iterable<IosApplicantContactModel> getApplicantContactsWithoutJsog(@PathVariable String id) {
+        return this.iosApplicantContactRepository.findByIdApplicant_Id(Long.valueOf(id));
     }
 
     @PostMapping(value = "/applicantContacts/add")

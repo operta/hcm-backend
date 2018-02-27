@@ -13,9 +13,5 @@ import java.util.List;
 public interface AtVacancyRepository extends JpaRepository<AtVacancyModel, Long> {
     Page<AtVacancyModel> findByStatus_Id(Long id, Pageable pageable);
     Page<AtVacancyModel> findAll(Pageable pageable);
-    List<AtVacancyModel> findByDateFromGreaterThanEqual(Date fromDate);
-    List<AtVacancyModel> findByDateToLessThanEqual(Date toDate);
-    List<AtVacancyModel> findByIdLocationId(Long id);
-    List<AtVacancyModel> findByStatusId(Long id);
-    List<AtVacancyModel> findByNameContainingIgnoreCase(String value);
+
 }

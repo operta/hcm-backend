@@ -7,6 +7,9 @@ public class AtApplicantDocumentController {
     @Autowired
     private AtApplicantDocumentRepository atApplicantDocumentRepository;
 
+    @Autowired
+    private IosApplicantDocumentRepository iosApplicantDocumentRepository;
+
     @RequestMapping("/applicantDocuments")
     public Iterable<AtApplicantDocumentModel> getAllApplicantDocuments() {
         return this.atApplicantDocumentRepository.findAll();
@@ -16,6 +19,12 @@ public class AtApplicantDocumentController {
     @ResponseBody
     public Iterable<AtApplicantDocumentModel> getApplicantDocuments(@PathVariable String id) {
         return this.atApplicantDocumentRepository.findByIdApplicant_id(Long.valueOf(id));
+    }
+
+    @GetMapping("/applicantDocuments/nojsog/{id}")
+    @ResponseBody
+    public Iterable<IosApplicantDocumentModel> getApplicantDocumentsWithoutJsog(@PathVariable String id) {
+        return this.iosApplicantDocumentRepository.findByIdApplicant_id(Long.valueOf(id));
     }
 
 

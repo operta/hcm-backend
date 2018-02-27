@@ -10,13 +10,14 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name="AT_APPLICANT_EXPERIENCES")
-public class AtApplicantExperienceModel {
+public class IosApplicantExperienceModel {
     @Id
     @SequenceGenerator(name="OID", sequenceName="OID", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="OID")
     private Long id;
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "ID_APPLICANT")
     private AtApplicantModel idApplicant;
 
@@ -31,7 +32,7 @@ public class AtApplicantExperienceModel {
     private String updated_by;
     private Timestamp updated_at;
 
-    public AtApplicantExperienceModel(){}
+    public IosApplicantExperienceModel(){}
 
     public Long getId() {
         return id;
@@ -129,7 +130,7 @@ public class AtApplicantExperienceModel {
         this.updated_at = updated_at;
     }
 
-    public AtApplicantExperienceModel(AtApplicantModel idApplicant, String company, String position, String location, String ongoing, Date date_from, Date date_to, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
+    public IosApplicantExperienceModel(AtApplicantModel idApplicant, String company, String position, String location, String ongoing, Date date_from, Date date_to, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
         this.idApplicant = idApplicant;
         this.company = company;
         this.position = position;
