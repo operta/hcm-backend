@@ -6,6 +6,7 @@ import ba.infostudio.hcm.rgRegions.RgRegionsModel;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -25,10 +26,13 @@ public class AtVacancyMModel {
 
     @OneToOne
     @JoinColumn(name = "ID_LOCATION")
-    private RgRegionsModel id_location;
+    private RgRegionsModel idLocation;
 
-    private Date date_from;
-    private Date date_to;
+    @Column(name = "date_from")
+    private Date dateFrom;
+
+    @Column(name = "date_to")
+    private Date dateTo;
 
     /*    @ManyToOne
         @JoinColumn(name = "ID_WORK_PLACE")
@@ -57,13 +61,13 @@ public class AtVacancyMModel {
     public AtVacancyMModel() {
     }
 
-    public AtVacancyMModel(String code, String name, String description, RgRegionsModel id_location, Date date_from, Date date_to, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<AtJobApplicationModel> jobApplications, AtVacancyStatusModel status, String job_role, String job_working_time, String skills_requirement, String language_requirement, String education_requirement, String experience_requirement) {
+    public AtVacancyMModel(String code, String name, String description, RgRegionsModel idLocation, Date dateFrom, Date dateTo, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at, Collection<AtJobApplicationModel> jobApplications, AtVacancyStatusModel status, String job_role, String job_working_time, String skills_requirement, String language_requirement, String education_requirement, String experience_requirement) {
         this.code = code;
         this.name = name;
         this.description = description;
-        this.id_location = id_location;
-        this.date_from = date_from;
-        this.date_to = date_to;
+        this.idLocation = idLocation;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
         this.created_by = created_by;
         this.created_at = created_at;
         this.updated_by = updated_by;
@@ -111,27 +115,27 @@ public class AtVacancyMModel {
     }
 
     public RgRegionsModel getId_location() {
-        return id_location;
+        return idLocation;
     }
 
-    public void setId_location(RgRegionsModel id_location) {
-        this.id_location = id_location;
+    public void setId_location(RgRegionsModel idLocation) {
+        this.idLocation = idLocation;
     }
 
     public Date getDate_from() {
-        return date_from;
+        return dateFrom;
     }
 
-    public void setDate_from(Date date_from) {
-        this.date_from = date_from;
+    public void setDate_from(Date dateFrom) {
+        this.dateFrom = dateFrom;
     }
 
     public Date getDate_to() {
-        return date_to;
+        return dateTo;
     }
 
-    public void setDate_to(Date date_to) {
-        this.date_to = date_to;
+    public void setDate_to(Date dateTo) {
+        this.dateTo = dateTo;
     }
 
     public String getCreated_by() {

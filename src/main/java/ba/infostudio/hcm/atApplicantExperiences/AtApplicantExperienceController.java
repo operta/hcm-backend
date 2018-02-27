@@ -10,6 +10,9 @@ public class AtApplicantExperienceController {
     @Autowired
     private AtApplicantExperienceRepository atApplicantExperienceRepository;
 
+    @Autowired
+    private IosApplicantExperienceRepository iosApplicantExperienceRepository;
+
     @RequestMapping("/applicantExperiences")
     public Iterable<AtApplicantExperienceModel> getAllApplicantExperiences() {
         return this.atApplicantExperienceRepository.findAll();
@@ -19,6 +22,12 @@ public class AtApplicantExperienceController {
     @ResponseBody
     public Iterable<AtApplicantExperienceModel> getApplicantExperience(@PathVariable String id) {
         return this.atApplicantExperienceRepository.findByIdApplicant_id(Long.valueOf(id));
+    }
+
+    @GetMapping("/applicantExperiences/njsog/{id}")
+    @ResponseBody
+    public Iterable<IosApplicantExperienceModel> getApplicantExperienceWithoutJsog(@PathVariable String id) {
+        return this.iosApplicantExperienceRepository.findByIdApplicant_id(Long.valueOf(id));
     }
 
     @PostMapping(value = "/applicantExperiences/add")
