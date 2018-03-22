@@ -1,12 +1,16 @@
 package ba.infostudio.hcm.apUsers;
 
+import ba.infostudio.hcm.apUserDeviceTokens.apUserDeviceTokenModel;
 import ba.infostudio.hcm.apUserStatuses.ApUserStatusModel;
 import ba.infostudio.hcm.rgRegions.RgRegionsModel;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-
+import java.util.Collection;
 @Entity
 @Table(name = "AP_USERS")
 public class ApUserModel implements Serializable {
@@ -122,6 +126,7 @@ public class ApUserModel implements Serializable {
         this.updated_at = updated_at;
     }
 
+
     public ApUserModel(String username, String email, String password, String role, String image_path, ApUserStatusModel id_status, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
         this.username = username;
         this.email = email;
@@ -134,5 +139,6 @@ public class ApUserModel implements Serializable {
         this.updated_by = updated_by;
         this.updated_at = updated_at;
     }
+
 }
 
