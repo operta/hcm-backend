@@ -1,6 +1,6 @@
 package ba.infostudio.hcm.atJobApplicationNotifications;
 
-import ba.infostudio.hcm.atJobApplications.AtJobApplicationModel;
+import ba.infostudio.hcm.atJobApplications.AtJobApplicationMModel;
 import ba.infostudio.hcm.atNotificationTemplates.AtNotificationTemplateModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,9 +16,8 @@ public class IosJobApplicationNotificationModel {
     private Long id;
 
     @OneToOne
-    @JsonIgnore
     @JoinColumn(name = "ID_JOB_APPLICATION")
-    private AtJobApplicationModel idJobApplication;
+    private AtJobApplicationMModel idJobApplication;
 
     @OneToOne
     @JoinColumn(name = "ID_NOTIFICATION")
@@ -40,11 +39,11 @@ public class IosJobApplicationNotificationModel {
         this.id = id;
     }
 
-    public AtJobApplicationModel getIdJobApplication() {
+    public AtJobApplicationMModel getIdJobApplication() {
         return idJobApplication;
     }
 
-    public void setIdJobApplication(AtJobApplicationModel idJobApplication) {
+    public void setIdJobApplication(AtJobApplicationMModel idJobApplication) {
         this.idJobApplication = idJobApplication;
     }
 
@@ -104,7 +103,7 @@ public class IosJobApplicationNotificationModel {
         this.updated_at = updated_at;
     }
 
-    public IosJobApplicationNotificationModel(AtJobApplicationModel idJobApplication, AtNotificationTemplateModel id_notification, Timestamp dateSent, String is_active, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
+    public IosJobApplicationNotificationModel(AtJobApplicationMModel idJobApplication, AtNotificationTemplateModel id_notification, Timestamp dateSent, String is_active, String created_by, Timestamp created_at, String updated_by, Timestamp updated_at) {
         this.idJobApplication = idJobApplication;
         this.id_notification = id_notification;
         this.dateSent = dateSent;
