@@ -51,6 +51,9 @@ public class AtJobApplicationNotificationController {
     private AtVacancyRepository atVacancyRepository;
 
     @Autowired
+    private ApUserRepository apUserRepository;
+
+    @Autowired
     public JavaMailSender emailSender;
 
     @Autowired
@@ -67,29 +70,15 @@ public class AtJobApplicationNotificationController {
     }
 
     @PostMapping(value = "/jobApplicationNotifications/add")
-    public AtJobApplicationNotificationModel addJobApplicationNotification(@RequestHeader("Authorization") String jwtToken,
-                                                                           @RequestBody AtJobApplicationNotificationModel notification) {
+    public AtJobApplicationNotificationModel addJobApplicationNotification(@RequestBody AtJobApplicationNotificationModel notification) {
 
 
 
-        // removing the bearer part from the token
-        jwtToken = jwtToken.substring(6).trim();
-        // decoding the token
-        Jwt token = JwtHelper.decode(jwtToken);
-        // getting the token in JSON format
-        String tokenString = token.getClaims();
-        // extracting the username from JSON the old school way
-        int indexOfUserName = tokenString.indexOf("user_name");
-        while(tokenString.charAt(indexOfUserName) != '"')indexOfUserName++;
-        indexOfUserName+=3;
-        StringBuilder userName = new StringBuilder();
-        while(tokenString.charAt(indexOfUserName) != '"') {
-            userName.append(tokenString.charAt(indexOfUserName));
-            indexOfUserName++;
-        }
-
+        String userName = this.apUserRepository.findByJobApplicationId(notification.getIdJobApplication().getId());
+        System.out.println("Username: ");
+        System.out.println(userName);
         // user device tokens where the notifications are going to be sent
-        List<String> deviceTokens = tokenRepository.findByUsername(userName.toString());
+        List<String> deviceTokens = tokenRepository.findByUsername(userName);
 
         // name of the vacancy for which the job application status has been updated
         String vacancyName = atVacancyRepository.findByJobApplicationId(notification.getIdJobApplication().getId());
