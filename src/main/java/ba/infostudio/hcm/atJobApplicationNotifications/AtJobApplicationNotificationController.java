@@ -71,7 +71,7 @@ public class AtJobApplicationNotificationController {
                                                                            @RequestBody AtJobApplicationNotificationModel notification) {
 
 
-
+        System.out.println("---------------------------NOTIFICATION ADDED----------------------------");
         // removing the bearer part from the token
         jwtToken = jwtToken.substring(6).trim();
         // decoding the token
@@ -89,8 +89,9 @@ public class AtJobApplicationNotificationController {
         }
 
         // user device tokens where the notifications are going to be sent
-        List<String> deviceTokens = tokenRepository.findByUsername(userName.toString());
-
+        // NEED TO FIND PROPER USER TO SEND NOTIFICATIONS
+        //List<String> deviceTokens = tokenRepository.findByUsername(userName.toString());
+        List<String> deviceTokens = tokenRepository.findByUsername("user");
         // name of the vacancy for which the job application status has been updated
         String vacancyName = atVacancyRepository.findByJobApplicationId(notification.getIdJobApplication().getId());
 
@@ -111,9 +112,10 @@ public class AtJobApplicationNotificationController {
 
                 CompletableFuture<String> pushNotifications = androidPushNotificationsService.send(request);
                 CompletableFuture.allOf(pushNotifications).join();
-
+                System.out.println("NOTIFICATION ADDED 2");
                 try {
                     String firebaseResponse = pushNotifications.get();
+                    System.out.println("NOTIFICATION ADDED FIREBASE");
                     System.out.println(firebaseResponse);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
